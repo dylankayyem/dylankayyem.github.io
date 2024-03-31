@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dylan Kayyem - Resume</title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css"> 
+    <script src="/js/navigation.js"></script>
+    
+</head>
+<body>
+    <div id="nav-placeholder"></div> <!-- Navigation placeholder -->
+
+    <div class="content">
+        <iframe src="/assets/resume.pdf" style="width:100%; height:100vh;" frameborder="0"></iframe>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadNavigationBar();
+            // Highlight the 'RESUME' tab as active
+            document.querySelector('.topnav a[href="html/resume.html"]').classList.add('active');
+        });
+    </script>
+</body>
+</html>

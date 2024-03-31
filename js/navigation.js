@@ -1,7 +1,6 @@
 /* navigation.js */
 
 function loadNavigationBar() {
-
     document.getElementById("nav-placeholder").innerHTML = `
     <div class="topnav" id="myTopnav">
 
@@ -12,6 +11,10 @@ function loadNavigationBar() {
         <a href="/html/software.html">Software Engineering Projects</a>
 
         <a href="/html/about.html">About Me</a>
+
+        <a href="/html/about.html">About Me</a>
+        
+        <a href="/html/resume.html">Resume</a>
 
         <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
 
@@ -33,3 +36,5 @@ function loadNavigationBar() {
     </script>
     `;
 }
+
+
