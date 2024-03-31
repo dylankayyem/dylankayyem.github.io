@@ -9,7 +9,7 @@ function loadNavigationBar() {
 
         <a href="/html/ui.html">UI/UX Projects</a>
 
-        <a href="/html/software.html>Software Engineering Projects</a>
+        <a href="/html/software.html">Software Engineering Projects</a>
 
         <a href="/html/about.html">About Me</a>
 
