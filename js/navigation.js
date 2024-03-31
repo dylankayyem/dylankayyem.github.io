@@ -13,9 +13,7 @@ function loadNavigationBar() {
 
         <a href="/html/about.html">About Me</a>
 
-        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-          <i class="fa fa-bars"></i>
-        </a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
 
     </div>
 
