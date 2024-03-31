@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <title>Dylan Kayyem's Portfolio</title>
-        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1"> 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- Link to hamburger icon -->
-        <link rel="stylesheet" href="css/style.css"> <!-- Link to your CSS file -->
-    </head>
+<head>
+    <title>Dylan Kayyem's Portfolio</title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- Link to hamburger icon -->
+    <link rel="stylesheet" href="css/style.css"> <!-- Link to your CSS file -->
+</head>
 
-    <body>
+<body>
 
-        <div class="topnav" id="myTopnav">
-            <a href="index.html" class="active">Home</a>
-            <a href="html/ui-design.html">UI/UX Design</a>
-            <a href="html/comp-sci.html">Software Development</a>
-            <a href="html/about-me.html">About Me</a>
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-              <i class="fa fa-bars"></i>
-            </a>
-        </div>
-        
-        
-        <div style="padding-left:16px">
-            <h1> Hi, I'm Dylan Kayyem </h1>
-            <h3> A product designer turned Software Developer based in Denver, CO.</h3>
-            <button>About Me</button>
-            <h3> Aspiring to push the world forward by creating a bridge between people and technology through user-centric design and software.</h3>
-            <button>UI/UX Design Projects</button>
-            <button>Software Engineering Projects</button>
-        </div>
+<div id="nav-placeholder"></div>
 
-        <script src="js/script.js"></script> <!-- Link to your JavaScript file -->
+<script src="js/navigation.js"></script>
+<script>
+    window.onload = function() {
+        loadNavigationBar();
+    };
+</script>
 
-    </body>
+<!-- page content here -->
+
+<div style="padding-left:16px">
+    <h1> Hi, I'm Dylan Kayyem </h1>
+    <h3> A product designer turned Software Developer based in Denver, CO.</h3>
+    <button>About Me</button>
+    <h3> Aspiring to push the world forward by creating a bridge between people and technology through user-centric design and software.</h3>
+    <button>UI/UX Design Projects</button>
+    <button>Software Engineering Projects</button>
+</div>
+
+</body>
 </html>
