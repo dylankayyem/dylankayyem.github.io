@@ -1,2 +1,2 @@
 # dylankayyem_com
-Portfolio for UX Design, Software Dev, and more about me.
+Dylan Kayyem's UX Design Portfolio, Software Engineering, and more about my work. 
