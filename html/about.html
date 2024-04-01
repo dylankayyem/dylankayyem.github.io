@@ -20,7 +20,7 @@
         <button class = "tabs__button" data-for-tab="2"> Tab #2</button>
         <button class = "tabs__button" data-for-tab="3"> Tab #3</button>
     </div>
-    <div class="tabs__content" data-tab="1">
+    <div class="tabs__content tabs__content--active" data-tab="1">
         <h2> Tab #1</h2>
         <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi aut voluptas ratione expedita quam, consequuntur vitae deserunt eius! Sunt blanditiis laborum quidem quia animi incidunt sapiente laboriosam vitae fugiat.</p>
         <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi aut voluptas ratione expedita quam, consequuntur vitae deserunt eius! Sunt blanditiis laborum quidem quia animi incidunt sapiente laboriosam vitae fugiat.</p>
@@ -39,12 +39,29 @@
 
     </div>
 </div>
+
 <script>
-    // Ensure navigation.js is correctly structured and includes the 
-    // loadNavigationBar function, as well as the myFunction for responsiveness.
+    function setupTabs () {
+        document.querySelectorAll(".tabs__button").forEach(button => {
+            button.addEventListener("click", () => {
+                const sideBar = button.parentElement;
+                const tabsContainer = sideBar.parentElement;
+                const tabsNumber = button.dataset.forTab;
+                const tabToActivate = tabsContainer.querySelector('.tabs__content[data-tab="${tabNumber}"]');
+                console.log(sideBar);
+                console.log(tabsContainer);
+                console.log(tabsNumber);
+                console.log(tabToActivate);
+            });
+        });
+    }
+
+
     document.addEventListener('DOMContentLoaded', function() {
         loadNavigationBar();
+        setupTabs();
     });
+
 </script>
   
 </body>
