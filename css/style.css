@@ -72,7 +72,6 @@ This class makes the topnav look good on small screens (display the links vertic
     width: 100%;
     outline: none;
     cursor: pointer;
-
 }
 
 .tabs__button:active {
@@ -80,7 +79,7 @@ This class makes the topnav look good on small screens (display the links vertic
 }
 
 .tabs__button:not(last-of-type) {
-    background: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
 }
 
 .tabs__button--active {
