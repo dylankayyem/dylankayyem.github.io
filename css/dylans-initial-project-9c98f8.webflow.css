@@ -34,7 +34,7 @@
 }
 
 body {
-  color: #23286b;
+
   height: 100%;
   font-family: DM Sans, sans-serif;
   font-size: 18px;
@@ -6485,11 +6485,11 @@ p {
 .section-38 {
   text-align: center;
   height: auto;
-  min-height: 100vh;
-  max-height: none;
+  
+  max-height: 60%;
   margin-left: auto;
   margin-right: auto;
-  padding: 220px 40px;
+  padding: 60px 80px;
 }
 
 .section-39 {
