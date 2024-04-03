@@ -14725,3 +14725,13 @@ div.section-38 {
   padding:0px;
   margin-left: 20px;
 }
+
+a.link-10 {
+  font-size: .7rem;
+  padding: 10px 20px;
+ text-transform: none;
+}
+
+.main-p__contents {
+  padding-bottom: 60px;
+}

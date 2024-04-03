@@ -111,40 +111,30 @@ body {
     letter-spacing: .15em;
     text-transform: uppercase;
     cursor: pointer;
-    
-    
     margin-left: auto;
     margin-right: auto; 
     padding: 10px 30px;
     font-family: Montserrat, sans-serif;
-    font-size: 30px;
+    font-size: 1.2rem;
     font-weight: 700;
     line-height: 1;
     text-decoration: none;
     display: inline-block;
-    background: none;
+    background: #888888;
     color: #ffffff;
 
     
 }
 
 #contact__header {
-    color: white;
-    font-family: Montserrat, sans-serif;
-    font-weight: 700;
-    margin: 60px;
-    display: inline;
-    letter-spacing: .15em;
-    font-size: 1.5rem;
-    margin-top: 10;
-    max-width: 250px;
-    display: inline;
-
+    color: whitesmoke;
+    padding: 0px 10px;
+    font-size: 1.3rem;
 }
 #intro-heading {
     text-align: start;
     display: inline-block;
-    color: white;
+    color: whitesmoke;
     text-transform: uppercase;
     margin-top: 60px;
     margin-bottom: 60px;
@@ -155,5 +145,13 @@ body {
 }
 
 .main-p {
-    color: white;
+    color: whitesmoke;
+}
+
+.div-block-49 {
+    display: flex;
+}
+
+.contact__cta {
+    flex: auto;
 }
