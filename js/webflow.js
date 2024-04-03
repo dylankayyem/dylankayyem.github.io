@@ -1,12 +1,4 @@
 
-/*!
- * Webflow: Front-end site library
- * @license MIT
- * Inline scripts may access the api using an async handler:
- *   var Webflow = Webflow || [];
- *   Webflow.push(readyFunction);
- */
-
 (() => {
   var __create = Object.create;
   var __defProp = Object.defineProperty;
@@ -229,16 +221,16 @@
         }, G = b.support = {
           bind: Function.prototype.bind,
           transform: F("transform"),
-          transition: F("transition"),
+          // transition: F("transition"),
           backface: F("backface-visibility"),
-          timing: F("transition-timing-function")
+          // timing: F("transition-timing-function")
         };
-        if (G.transition) {
-          var H = G.timing.dom;
-          if (C.style[H] = m["ease-in-back"][0], !C.style[H])
-            for (var I in n)
-              m[I][0] = n[I];
-        }
+        // if (G.transition) {
+        //   var H = G.timing.dom;
+        //   if (C.style[H] = m["ease-in-back"][0], !C.style[H])
+        //     for (var I in n)
+        //       m[I][0] = n[I];
+        // }
         var J = b.frame = function() {
           var a2 = p.requestAnimationFrame || p.webkitRequestAnimationFrame || p.mozRequestAnimationFrame || p.oRequestAnimationFrame || p.msRequestAnimationFrame;
           return a2 && G.bind ? a2.bind(p) : function(a3) {

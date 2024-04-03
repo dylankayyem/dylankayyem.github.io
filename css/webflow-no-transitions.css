@@ -145,7 +145,6 @@ pre.w-code-block code {
   box-shadow: none;
   opacity: 1;
   transform: none;
-  transition: none;
   direction: ltr;
   font-family: inherit;
   font-weight: inherit;
@@ -1009,7 +1008,6 @@ textarea.w-select {
   background-color: rgba(255, 255, 255, 0.4);
   cursor: pointer;
   margin: 0 3px 0.5em;
-  /* transition: background-color 100ms, color 100ms; */
 }
 .w-slider-dot.w-active {
   background-color: #fff;
@@ -1161,11 +1159,6 @@ textarea.w-select {
  * Wrapper around all lightbox elements
  *
  * 1. Since the lightbox can receive focus, IE also gives it an outline.
- * 2. Fixes flickering on Chrome when a transition is in progress
- *    underneath the lightbox.
- */
-.w-lightbox-backdrop {
-  cursor: auto;
   font-style: normal;
   letter-spacing: normal;
   list-style: disc;
@@ -1297,8 +1290,6 @@ textarea.w-select {
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
-  -webkit-transition: all 0.3s;
-  /* transition: all 0.3s; */
 }
 .w-lightbox-left {
   display: none;

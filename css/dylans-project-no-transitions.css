@@ -8524,7 +8524,6 @@ p {
   padding-bottom: 10px;
 }
 
-
 @media screen and (max-width: 991px) {
   .learn-more-section {
     padding-top: 100px;
@@ -9431,7 +9430,7 @@ p {
   }
 
   .link-10 {
-    font-size: 18px;
+    font-size: 22px;
   }
 
   .heading-26 {
@@ -9579,25 +9578,7 @@ p {
   }
 }
 
-/* Samsung Galazy S20 Ultra */
 @media screen and (max-width: 767px) {
-  
-  div.div-block-69 {
-    margin: 0px;
-    padding: 0px;
-  }
-  
-  p.main-p {
-    font-size: 1rem;
-    padding-right: 10px;
-    font-display: start;
-  }
-  div.section-38 {
-    padding: 0px;
-    margin: 0px;
-    
-  }
-
   h3 {
     color: #804f3e;
     margin-bottom: 20px;
@@ -10858,15 +10839,8 @@ p {
   }
 }
 
-/* 
-window is 479 pixels wide or less,
-  Examples:
-  -iPhone SE?
-  -
-  -
- 
-*/
-@media screen and (max-width: 480px) {
+/* iPhone SE */
+@media screen and (max-width: 479px) {
   h1 {
     font-size: 2.4em;
   }
@@ -14713,15 +14687,6 @@ window is 479 pixels wide or less,
   div.div-block-249 {
     padding: 0px;
   }
-  div.div-block-69 {
-    padding: 20px;
-  }
 }
 
 
-div.section-38 {
-  text-align: start;
-
-  padding:0px;
-  margin-left: 20px;
-}
