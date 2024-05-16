@@ -6,7 +6,7 @@ body {
     margin: 0;
 }
 
-.p-body {
+body.p-body {
     background-color: whitesmoke;
 }
 
