@@ -1,15 +1,10 @@
 function loadNavigationBar() {
     document.getElementById("nav-placeholder").innerHTML = `
     <div class="topnav" id="myTopnav">
-
-        <a href="index.html" class="active">Home</a>
-
-        <a href="about.html">About Me</a>
-        
-        <a href="my-work.html">My Work</a>
-
-        <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
-
+      <a href="my-work.html">Portfolio</a>
+      <a href="about.html">Contact</a>
+      <a href="index.html" class="active">About</a>
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
     </div>
     `;
 }

@@ -31,7 +31,6 @@ body.p-body {
 
 .side-right {
     /* background-color: blue; */
-
 }
 
 .wrap {
@@ -74,11 +73,10 @@ body.p-body {
 /* top navigation bar styling */
 .topnav {
     overflow: hidden;
-    background-color: rgb(12, 12, 12);
 }
 
 .topnav a {
-    float: left;
+    float: right;
     display: block;
     color: #f3f3f3;
     text-align: center;
