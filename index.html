@@ -30,7 +30,7 @@
     <p> I'm a UI/UX Designer turned Software Engineer based in the city of Broomfield, Colorado.</p>
     <p>Aspiring to push the world forward by creating a bridge between people and technology.</p>
     <div class="links">
-      <a href="#skills"><i class="fa-solid fa-file"></i><span> Resume</span></a>
+      <a href="files/Dylan_Kayyem.pdf" download><i class="fa-solid fa-file"></i><span> Resume</span></a>
       <a href="#projects"><i class="fa-solid fa-code"></i><span> Projects</span></a>
       <a href="#testimony"><i class="fa-solid fa-pen"></i><span> Testimony</span></a>
       <a href="#contact"><i class="fa-solid fa-envelope"></i><span> Contact</span></a>
@@ -251,10 +251,11 @@
     </li>
   </ul>
 </section>
+
 <section id="projects" class="projects-section">
   <h2>Projects</h2>
   <ul>
-    <li onclick="window.open('https://github.com/dylankayyem/Healthcare-Organization-Database', '_blank')">
+    <li class = "project-item" data-image-url="image/health.png" onclick="window.open('https://github.com/dylankayyem/Healthcare-Organization-Database', '_blank')">
       <div class="education-card">
       <div class="degree">
       <span class="title">Healthcare Database</span>
@@ -269,12 +270,16 @@
       </div>
       <span class="descr">I engineered a MySQL database to map hospital entity relationships, utilizing a Python stack in Jupyter for complex SQL queries with SQLAlchemy.</span>
       <br>
-      </div>
       <div class="links">
         <a id = "links" href="https://github.com/dylankayyem/Healthcare-Organization-Database" target="_parent"><i class="fa-solid fa-code"></i><span>View Code</span></a>
       </div>
+ 
+      <div class="media-background">
+       
+      </div>
+
     </li>
-    <li onclick="window.open('https://github.com/dylankayyem/Blood-Bank-Management-Database', '_blank')">
+    <li class = "project-item" data-video-url="image/appDemo.mp4" onclick="window.open('https://github.com/dylankayyem/Blood-Bank-Management-Database', '_blank')">
     <div class="education-card">
     <div class="degree">
     <span class="title">Blood Bank Database</span>
@@ -295,72 +300,83 @@
     <span>View Code</span>
     </a>
     </div>
-    </li>
-    <li onclick="window.open('start.html', '_blank')">
-    <div class="education-card">
-    <div class="degree">
-    <span class="title">It's A Start</span>
-    <span class="date">MARCH 2021</span>
-    </div>
-    <br>
-    <div class="stack">
-    <img src="image/figma.webp" alt="mysql logo">
-    <img src="image/invision.webp" alt="mysql logo">
-    <img src="image/sketch.webp" alt="mysql logo">
-    </div>
-    <span class="descr">A collaborative team project for a Google Hackathon event hosted by Brainstation. It overviews the final digital product and it highlights the collaborative components of the design process involved.</span>
-    <br>
-    </div>
-    <div class="links">
-    <a href="start.html">
-    <i class="fa-solid fa-pen"></i>
-    <span>View Design</span>
-    </a>
+    <div class="media-background">
+      <video class="loom-video" muted loop>
+        <source src="image/appDemo.mp4" type="video/mp4">
+      </video>
     </div>
     </li>
-    <li onclick="window.open('pawprints.html', '_blank')">
-    <div class="education-card">
-    <div class="degree">
-    <span class="title">PawPrints</span>
-    <span class="date">JAN - MARCH 2021</span>
-    </div>
-    <br>
-    <div class="stack">
-    <img src="image/figma.webp" alt="mysql logo">
-    <img src="image/invision.webp" alt="mysql logo">
-    <img src="image/sketch.webp" alt="mysql logo">
-    </div>
-    <span class="descr">A social media app for dog-lovers. The PawPrints App is a passion project that started as a Capstone Project for my Brainstation UX diploma. This is a case study for my social media app for dogs. The study overviews my design process & explains the methodology in developing a solution to a real world problem.</span>
-    <br>
-    </div>
-    <div class="links">
-    <a href="pawprints.html">
-    <i class="fa-solid fa-pen"></i>
-    <span>View Design</span>
-    </a>
-    </div>
+    <li class = "project-item" data-video-url="https://www.loom.com/embed/d6db874434cb414bbe2ca53c51aaa23b?sid=aea3c0cb-4ebd-4fcd-bc31-aa81844e41b5" onclick="window.open('pawprints.html', '_blank')">
+      <div class="education-card">
+      <div class="degree">
+      <span class="title">PawPrints</span>
+      <span class="date">JAN - MARCH 2021</span>
+      </div>
+      <br>
+      <div class="stack">
+      <img src="image/figma.webp" alt="mysql logo">
+      <img src="image/invision.webp" alt="mysql logo">
+      <img src="image/sketch.webp" alt="mysql logo">
+      </div>
+      <span class="descr">A social media app for dog-lovers. The PawPrints App is a passion project that started as a Capstone Project for my Brainstation UX diploma. This is a case study for my social media app for dogs. The study overviews my design process & explains the methodology in developing a solution to a real world problem.</span>
+      <br>
+      </div>
+      <div class="links">
+      <a href="pawprints.html">
+      <i class="fa-solid fa-pen"></i>
+      <span>View Design</span>
+      </a>
+      </div>
+      <div class="media-background">
+        <iframe class="loom-video" frameborder= "0" allowfullscreen></iframe>
+      </div>
     </li>
-    <li onclick="window.open('presto.html', '_blank')">
-    <div class="education-card">
-    <div class="degree">
-    <span class="title">Presto</span>
-    <span class="date">FEB 2021</span>
-    </div>
-    <br>
-    <div class="stack">
-    <img src="image/figma.webp" alt="mysql logo">
-    <img src="image/invision.webp" alt="mysql logo">
-    <img src="image/sketch.webp" alt="mysql logo">
-    </div>
-    <span class="descr">A heuristic evaluation of Presto (a Canadian Transit App). The Presto App was a collaborative heuristic project for a sprint - design challenge hosted by Brainstation. The challenge had us redesign a current app and find heuristics that stand out, explain why they don't work, and redesign a successful solution. The study highlights my design process and my contributions to the final product we developed.</span>
-    <br>
-    </div>
-    <div class="links">
-    <a href="presto.html">
-    <i class="fa-solid fa-pen"></i>
-    <span>View Design</span>
-    </a>
-    </div>
+    <li class = "project-item" data-image-url="image/start.png.png" onclick="window.open('start.html', '_blank')">
+      <div class="education-card">
+      <div class="degree">
+      <span class="title">It's A Start</span>
+      <span class="date">MARCH 2021</span>
+      </div>
+      <br>
+      <div class="stack">
+      <img src="image/figma.webp" alt="mysql logo">
+      <img src="image/invision.webp" alt="mysql logo">
+      <img src="image/sketch.webp" alt="mysql logo">
+      </div>
+      <span class="descr">A collaborative team project for a Google Hackathon event hosted by Brainstation. It overviews the final digital product and it highlights the collaborative components of the design process involved.</span>
+      <br>
+      </div>
+      <div class="links">
+      <a href="start.html">
+      <i class="fa-solid fa-pen"></i>
+      <span>View Design</span>
+      </a>
+      </div>
+      <div class="media-background"></div>
+    </li>
+    
+    <li class = "project-item" data-image-url="image/presto.png" onclick="window.open('presto.html', '_blank')">
+      <div class="education-card">
+      <div class="degree">
+      <span class="title">Presto</span>
+      <span class="date">FEB 2021</span>
+      </div>
+      <br>
+      <div class="stack">
+      <img src="image/figma.webp" alt="mysql logo">
+      <img src="image/invision.webp" alt="mysql logo">
+      <img src="image/sketch.webp" alt="mysql logo">
+      </div>
+      <span class="descr">A heuristic evaluation of Presto (a Canadian Transit App). The Presto App was a collaborative heuristic project for a sprint - design challenge hosted by Brainstation. The challenge had us redesign a current app and find heuristics that stand out, explain why they don't work, and redesign a successful solution. The study highlights my design process and my contributions to the final product we developed.</span>
+      <br>
+      </div>
+      <div class="links">
+      <a href="presto.html">
+      <i class="fa-solid fa-pen"></i>
+      <span>View Design</span>
+      </a>
+      </div> 
+      <div class="media-background"></div>
     </li>
   </ul>
 </section>
@@ -404,28 +420,73 @@
 </main>
 <script>
   document.getElementById('contact-form').addEventListener('submit', async function(event) {
-    event.preventDefault();
-    const form = event.target;
-    const statusDiv = document.getElementById('form-status');
-    try {
-      const response = await fetch(form.action, {
+  event.preventDefault();
+  const form = event.target;
+  const statusDiv = document.getElementById('form-status');
+  try {
+    const response = await fetch(form.action, {
       method: form.method,
       body: new FormData(form),
       headers: {
-      'Accept': 'application/json'
-      }
-      });
-      if (response.ok) {
-        form.reset();
-        statusDiv.innerHTML = "Thanks for your message! 👋";
-        } else {
-        const data = await response.json();
-        statusDiv.innerHTML = data.errors ? data.errors.map(error => error.message).join(", ") : "Oops! There was a problem submitting your form.";
-        }
-      } catch (error) {
-      statusDiv.innerHTML = "Oops! There was a problem submitting your form.";
+        'Accept': 'application/json'
       }
     });
+    if (response.ok) {
+      form.reset();
+      statusDiv.innerHTML = "Thanks for your message! 👋";
+    } else {
+      const data = await response.json();
+      statusDiv.innerHTML = data.errors ? data.errors.map(error => error.message).join(", ") : "Oops! There was a problem submitting your form.";
+    }
+  } catch (error) {
+    statusDiv.innerHTML = "Oops! There was a problem submitting your form.";
+  }
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+  const projectItems = document.querySelectorAll('.project-item');
+
+  projectItems.forEach(item => {
+    const imageUrl = item.getAttribute('data-image-url');
+    const videoUrl = item.getAttribute('data-video-url');
+    const mediaBackground = item.querySelector('.media-background');
+    const videoElement = item.querySelector('.loom-video');
+
+    if (imageUrl) {
+      mediaBackground.style.backgroundImage = `url(${imageUrl})`;
+    }
+
+    if (videoUrl) {
+      if (videoElement.tagName === 'IFRAME') {
+        videoElement.src = `${videoUrl}?muted=true&autoplay=1&loop=1`;
+      } else {
+        videoElement.querySelector('source').src = videoUrl;
+        videoElement.load();
+      }
+    }
+
+    item.addEventListener('mouseover', () => {
+      if (videoUrl) {
+        videoElement.style.display = 'block';
+        mediaBackground.style.backgroundImage = 'none';
+        videoElement.play();
+      }
+    });
+
+    item.addEventListener('mouseout', () => {
+      if (videoUrl) {
+        videoElement.style.display = 'none';
+        videoElement.pause();
+        if (imageUrl) {
+          mediaBackground.style.backgroundImage = `url(${imageUrl})`;
+        }
+      }
+    });
+  });
+});
+
+
+
  </script>
 </body>
 </html>
