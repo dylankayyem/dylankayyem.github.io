@@ -122,9 +122,7 @@ nav .right a span {
   border-radius: 5px;
 }
 
-.projects-section {
-  cursor: pointer;
-}
+
 .projects-section ul {
   list-style-type: none;
   padding: 0;
@@ -134,27 +132,7 @@ nav .right a span {
   overflow: visible;
 }
 
-.media-background {
-  position: absolute;
-  width: 100%;  /* Set the width of the pop-out window */
-  height: 100%;  /* Set the height of the pop-out window */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  background-size: cover;
-  background-position: center;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  pointer-events: none;
-  z-index: 10;
-  border: 2px solid #eee;  /* Optional: add a border to the pop-out window */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Optional: add a shadow to the pop-out window */
-}
 
-.project-item:hover .media-background {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
 
 .loom-video {
   width: 100%;
@@ -286,9 +264,11 @@ nav .right a span {
 
 .education-section li:hover,
 .experience-section li:hover,
-.projects-section li:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.projects-section li:hover,
+.links a:hover,
+.projects-section .stack img:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .education-section .degree,
