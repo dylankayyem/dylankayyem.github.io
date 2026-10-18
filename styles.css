@@ -57,8 +57,9 @@
   --mono-c4: rgba(255, 140, 185, 0.55);
   --mono-glass: rgba(255, 255, 255, 0.40);
   --mono-sheen: rgba(255, 255, 255, 0.34);
-  --mono-ink-top: #171a20;
-  --mono-ink-bottom: #3b4454;
+  --mono-ink-a: #3d6dff;
+  --mono-ink-b: #8257ff;
+  --mono-ink-c: #14b1a4;
   --mono-shadow: rgba(26, 28, 32, 0.16);
   --footer-border: rgba(255, 255, 255, 0.8);
   --radius: 24px;
@@ -626,12 +627,39 @@ nav .right .theme-toggle .icon-sun {
   overflow: visible;
 }
 
-.monogram .ink-top {
-  stop-color: var(--mono-ink-top);
+/* Letter gradient: blue to violet to teal, slowly cycling so the colour
+   appears to flow through the initials. */
+.monogram .ink-a {
+  stop-color: var(--mono-ink-a);
+  animation: mono-ink-a 14s linear infinite;
 }
 
-.monogram .ink-bottom {
-  stop-color: var(--mono-ink-bottom);
+.monogram .ink-b {
+  stop-color: var(--mono-ink-b);
+  animation: mono-ink-b 14s linear infinite;
+}
+
+.monogram .ink-c {
+  stop-color: var(--mono-ink-c);
+  animation: mono-ink-c 14s linear infinite;
+}
+
+@keyframes mono-ink-a {
+  0%, 100% { stop-color: var(--mono-ink-a); }
+  33% { stop-color: var(--mono-ink-b); }
+  66% { stop-color: var(--mono-ink-c); }
+}
+
+@keyframes mono-ink-b {
+  0%, 100% { stop-color: var(--mono-ink-b); }
+  33% { stop-color: var(--mono-ink-c); }
+  66% { stop-color: var(--mono-ink-a); }
+}
+
+@keyframes mono-ink-c {
+  0%, 100% { stop-color: var(--mono-ink-c); }
+  33% { stop-color: var(--mono-ink-a); }
+  66% { stop-color: var(--mono-ink-b); }
 }
 
 .monogram .letters {
@@ -1112,8 +1140,9 @@ nav .right .theme-toggle .icon-sun {
   --mono-c4: rgba(255, 120, 175, 0.44);
   --mono-glass: rgba(22, 26, 38, 0.26);
   --mono-sheen: rgba(255, 255, 255, 0.16);
-  --mono-ink-top: #ffffff;
-  --mono-ink-bottom: #c5cee0;
+  --mono-ink-a: #86aaff;
+  --mono-ink-b: #bb9cff;
+  --mono-ink-c: #5fe4d3;
   --mono-shadow: rgba(0, 0, 0, 0.45);
   --footer-border: rgba(255, 255, 255, 0.10);
   }
@@ -1178,8 +1207,9 @@ nav .right .theme-toggle .icon-sun {
   --mono-c4: rgba(255, 120, 175, 0.44);
   --mono-glass: rgba(22, 26, 38, 0.26);
   --mono-sheen: rgba(255, 255, 255, 0.16);
-  --mono-ink-top: #ffffff;
-  --mono-ink-bottom: #c5cee0;
+  --mono-ink-a: #86aaff;
+  --mono-ink-b: #bb9cff;
+  --mono-ink-c: #5fe4d3;
   --mono-shadow: rgba(0, 0, 0, 0.45);
   --footer-border: rgba(255, 255, 255, 0.10);
 }
