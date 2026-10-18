@@ -18,16 +18,16 @@
     <a href="index.html">Dylan Kayyem</a>
   </div>
   <div class="right">
-    <a href="index.html">
-      <i class="fa-solid fa-house"></i>
+    <a href="index.html" aria-label="Home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3.5 11 12 3.8l8.5 7.2M5.5 9.8V20h4.8v-5.4h3.4V20h4.8V9.8"/></svg>
       <span>Home</span>
     </a>
-    <a href="index.html#projects">
-      <i class="fa-solid fa-code"></i>
+    <a href="index.html#projects" aria-label="Projects">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m8 8-4.5 4L8 16M16 8l4.5 4L16 16M13.5 5l-3 14"/></svg>
       <span>Projects</span>
     </a>
-    <a href="mailto:dylankayyem@gmail.com">
-      <i class="fa-solid fa-envelope"></i>
+    <a href="mailto:dylankayyem@gmail.com" aria-label="Email">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m3.5 7.5 8.5 6 8.5-6"/></svg>
       <span>Email</span>
     </a>
   </div>
@@ -97,6 +97,25 @@
     <a href="files/Dylan_Kayyem.pdf" download>Resume</a>
   </div>
 </footer>
+
+<nav class="tabbar" aria-label="Sections">
+  <a href="index.html">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3.5 11 12 3.8l8.5 7.2M5.5 9.8V20h4.8v-5.4h3.4V20h4.8V9.8"/></svg>
+    <span>Home</span>
+  </a>
+  <a href="about.html" class="active">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg>
+    <span>About</span>
+  </a>
+  <a href="#resume">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8zM14 3v5h5M9 13h6M9 17h6"/></svg>
+    <span>Resume</span>
+  </a>
+  <a href="#contact">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m3.5 7.5 8.5 6 8.5-6"/></svg>
+    <span>Contact</span>
+  </a>
+</nav>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
