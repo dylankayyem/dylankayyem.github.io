@@ -608,9 +608,25 @@ nav .right .theme-toggle .icon-sun {
    Sections 3 and 4: Education and Experience
    -------------------------------------------------------------------------- */
 
-/* Two brand logos on the current role */
+/* Two brand logos on the current role, each linking to its site */
 .experience-section .brands {
   gap: 10px 32px;
+}
+
+.experience-section .brands a {
+  display: inline-flex;
+  border-radius: 10px;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.experience-section .brands a:hover {
+  transform: translateY(-1px);
+  opacity: 0.85;
+}
+
+.experience-section .brands a:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 3px;
 }
 
 .experience-section .brands img {
