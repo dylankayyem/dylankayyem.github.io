@@ -679,6 +679,59 @@ nav .right a:last-child:hover {
 }
 
 /* --------------------------------------------------------------------------
+   About page
+   -------------------------------------------------------------------------- */
+
+.about-hero h1 {
+  font-size: clamp(30px, 4vw, 42px);
+}
+
+.about-hero .text p a:not(.primary) {
+  font-weight: 500;
+}
+
+.resume-frame {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 12px;
+  margin-top: 40px;
+}
+
+.resume-frame {
+  display: block;
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.resume-frame:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+}
+
+.resume-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+}
+
+.contact-section .group.contact-links-only {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-section .group.contact-links-only .links {
+  justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
    Footer
    -------------------------------------------------------------------------- */
 
@@ -890,6 +943,11 @@ nav .right a:last-child:hover {
 
   .contact-section .group form {
     padding: 20px;
+  }
+
+  .resume-frame {
+    padding: 6px;
+    margin-top: 28px;
   }
 
   .site-footer {

@@ -5,6 +5,7 @@ function loadNavigationBar() {
   var links = [
     { href: 'index.html', label: 'Home' },
     { href: 'index.html#projects', label: 'Projects' },
+    { href: 'about.html', label: 'About', hideOnMobile: true },
     { href: 'files/Dylan_Kayyem.pdf', label: 'Resume', download: true, hideOnMobile: true },
     { href: 'index.html#contact', label: 'Contact', cta: true }
   ];
