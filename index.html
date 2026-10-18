@@ -10,7 +10,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="stylesheet" href="styles.css">
-  <title>Portfolio - DK</title>
+  <meta name="description" content="Dylan Kayyem - Junior Marketing Technology Manager at Titan Vans and Timber Van Kits. UI/UX designer turned software engineer based in Colorado.">
+  <meta name="theme-color" content="#f6f7f9">
+  <title>Dylan Kayyem - Portfolio</title>
 </head>
 <body>
 <nav>
@@ -36,13 +38,14 @@
 
 <section class="hero-section">
   <div class="text">
-    <h2>Hello, I'm Dylan 👋</h2>
-    <p> I'm a UI/UX Designer turned Software Engineer based in Broomfield, Colorado.</p>
+    <p class="eyebrow">Junior Marketing Technology Manager &middot; Boulder, CO</p>
+    <h1>Hello, I'm Dylan 👋</h1>
+    <p>I'm a UI/UX Designer turned Software Engineer based in Broomfield, Colorado.</p>
     <p>Currently, I'm the Junior Marketing Technology Manager for <a href="https://www.titanvans.com/" target="_blank" rel="noopener noreferrer">Titan Vans</a> and <a href="https://www.timbervankits.com/" target="_blank" rel="noopener noreferrer">Timber Van Kits</a> in Boulder, CO.</p>
     <p>Aspiring to push the world forward by creating a bridge between people and technology.</p>
 
     <div class="links">
-      <a href="files/Dylan_Kayyem.pdf" download>
+      <a class="primary" href="files/Dylan_Kayyem.pdf" download>
         <i class="fa-solid fa-file"></i>
         <span> Resume</span>
       </a>
@@ -68,6 +71,7 @@
 
 <section id="skills" class="skills-section">
   <h2>Skills</h2>
+  <p class="section-intro">Marketing technology, web development, and product design tools I work with.</p>
 
   <div class="cells">
 
@@ -313,7 +317,7 @@
     <div class="collegemark">
     <img src="image/University_of_Colorado_Boulder_logo.png" alt="boulder logo">
     </div>
-    <span class="date">JAN 2021 - APR 2021</span> 
+    <span class="date">JAN 2021 - DEC 2023</span>
     </div>
     <span class="title">Bachelor of Science in Applied Computer Science</span>
     </div>
@@ -339,9 +343,9 @@
     <div class="collegemark">
     <img src="image/University_of_Colorado_Boulder_logo.png" alt="boulder logo">
     </div>
-    <span class="date">JAN 2021 - DEC 2023</span>
+    <span class="date">JAN 2011 - DEC 2018</span>
     </div>
-    <span class="title">Bachelor of Art in Psychology & Philosophy</span>
+    <span class="title">Bachelor of Arts in Psychology & Philosophy</span>
     </div>
     </li>
   </ul>
@@ -603,7 +607,19 @@
 
 </main>
 
+<footer class="site-footer">
+  <p>&copy; <span id="year"></span> Dylan Kayyem &middot; Broomfield, CO</p>
+  <div class="footer-links">
+    <a href="https://github.com/dylankayyem" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="https://www.linkedin.com/in/dylankayyem/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="mailto:dylankayyem@gmail.com">Email</a>
+    <a href="files/Dylan_Kayyem.pdf" download>Resume</a>
+  </div>
+</footer>
+
 <script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
   document.getElementById('contact-form').addEventListener('submit', async function(event) {
   event.preventDefault();
   const form = event.target;
