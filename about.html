@@ -31,19 +31,19 @@
     <a href="index.html">Dylan Kayyem</a>
   </div>
   <div class="right">
-    <a href="index.html" aria-label="Home">
+    <a href="index.html" aria-label="Home" data-tip="Home" data-tip-sub="Back to the portfolio" data-tip-nav>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3.5 11 12 3.8l8.5 7.2M5.5 9.8V20h4.8v-5.4h3.4V20h4.8V9.8"/></svg>
       <span>Home</span>
     </a>
-    <a href="index.html#projects" aria-label="Projects">
+    <a href="index.html#projects" aria-label="Projects" data-tip="Projects" data-tip-sub="Selected work" data-tip-nav>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m8 8-4.5 4L8 16M16 8l4.5 4L16 16M13.5 5l-3 14"/></svg>
       <span>Projects</span>
     </a>
-    <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+    <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" data-tip="Theme" data-tip-sub="Switch between light and dark" data-tip-nav>
       <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M20.5 14.3A8.5 8.5 0 0 1 9.7 3.5a8.5 8.5 0 1 0 10.8 10.8z"/></svg>
       <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.5 1.5M17.2 17.2l1.5 1.5M5.3 18.7l1.5-1.5M17.2 6.8l1.5-1.5"/></svg>
     </button>
-    <a href="mailto:dylankayyem@gmail.com" aria-label="Email">
+    <a href="mailto:dylankayyem@gmail.com" aria-label="Email" data-tip="Email" data-tip-sub="dylankayyem@gmail.com" data-tip-nav>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m3.5 7.5 8.5 6 8.5-6"/></svg>
       <span>Email</span>
     </a>
@@ -93,7 +93,7 @@
 <section id="resume" class="resume-section">
   <h2>Resume</h2>
   <p class="section-intro">A one-page overview of my experience, education, and the tools I work with. Prefer a file? <a href="files/Dylan_Kayyem.pdf" download>Download the PDF</a>.</p>
-  <a class="resume-frame" href="files/Dylan_Kayyem.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open the resume PDF">
+  <a class="resume-frame" href="files/Dylan_Kayyem.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open the resume PDF" data-tip="Resume" data-tip-sub="Opens the PDF in a new tab" data-tip-guard>
     <img src="image/resume-preview.webp" alt="Preview of Dylan Kayyem's one-page resume" loading="lazy" width="935" height="1210">
   </a>
 </section>
@@ -176,5 +176,6 @@
     else if (mq.addListener) mq.addListener(onChange);
   })();
 </script>
+<script src="tooltip.js" defer></script>
 </body>
 </html>

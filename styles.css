@@ -1089,6 +1089,87 @@ nav .right .theme-toggle .icon-sun {
    which stores data-theme on <html>.
    ========================================================================== */
 
+/* --------------------------------------------------------------------------
+   Tooltip (one shared glass bubble, driven by tooltip.js)
+   -------------------------------------------------------------------------- */
+
+.tip {
+  position: fixed;
+  z-index: 200;
+  max-width: 240px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--glass-bg-strong);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-highlight), 0 0 0 1px var(--glass-edge), var(--shadow-md);
+  color: var(--text-color);
+  font-size: 13px;
+  line-height: 1.35;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px) scale(0.98);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.tip.below {
+  transform: translateY(-4px) scale(0.98);
+}
+
+.tip.show {
+  opacity: 1;
+  transform: none;
+}
+
+.tip .tip-title {
+  display: block;
+  font-weight: 600;
+}
+
+.tip .tip-sub {
+  display: block;
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-top: 1px;
+}
+
+.tip .tip-hint {
+  display: block;
+  color: var(--link-color);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin-top: 4px;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .tip {
+    background: var(--glass-fallback);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .tip {
+    background: var(--glass-solid);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+[data-tip] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.stack img[data-tip],
+.collegemark[data-tip],
+.wordmark[data-tip],
+.logo[data-tip],
+.hd[data-tip] {
+  cursor: default;
+}
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
   color-scheme: dark;
