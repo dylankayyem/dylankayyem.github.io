@@ -1,0 +1,220 @@
+/* Project demo overlay (see demo.js). Uses the chrome.css tokens. */
+
+.demo-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(10, 12, 18, 0.45);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+
+.demo-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+body.demo-open {
+  overflow: hidden;
+}
+
+.demo-window {
+  display: flex;
+  flex-direction: column;
+  width: min(1240px, 100%);
+  height: min(840px, 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-highlight), 0 0 0 1px var(--glass-edge), 0 30px 80px rgba(0, 0, 0, 0.35);
+  transform: translateY(14px) scale(0.985);
+  transition: transform 0.26s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.demo-overlay.open .demo-window {
+  transform: none;
+}
+
+.demo-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 50px;
+  padding: 0 10px 0 16px;
+  flex-shrink: 0;
+  font-family: var(--font);
+  color: var(--text-color);
+  border-bottom: 1px solid var(--glass-edge);
+}
+
+.demo-bar-left,
+.demo-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.demo-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4f7cff, #2cc4b6);
+  box-shadow: 0 0 0 3px var(--accent-tint);
+  flex-shrink: 0;
+}
+
+.demo-title {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.demo-badge {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--link-color);
+  background: var(--accent-tint);
+  border: 1px solid var(--control-border);
+  border-radius: 999px;
+  padding: 3px 9px;
+  white-space: nowrap;
+}
+
+.demo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: var(--text-color);
+  background: var(--control-bg);
+  border: 1px solid var(--control-border);
+  box-shadow: var(--control-highlight), 0 0 0 1px var(--glass-edge);
+  cursor: pointer;
+  font: inherit;
+  text-decoration: none;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.demo-btn:hover {
+  background: var(--control-bg-hover);
+}
+
+.demo-btn:active {
+  transform: scale(0.94);
+}
+
+.demo-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.demo-btn.demo-close {
+  color: var(--puck-color);
+  background: var(--puck-bg);
+  border-color: var(--puck-border);
+  box-shadow: var(--puck-shadow);
+}
+
+.demo-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  background: #0f1117;
+}
+
+.demo-frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: transparent;
+}
+
+.demo-loading {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-solid);
+}
+
+.demo-overlay.loading .demo-loading {
+  display: flex;
+}
+
+.demo-loading span {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 3px solid var(--border);
+  border-top-color: var(--link-color);
+  animation: demo-spin 0.8s linear infinite;
+}
+
+@keyframes demo-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 740px) {
+  .demo-overlay {
+    padding: 0;
+  }
+
+  .demo-window {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    border: 0;
+  }
+
+  .demo-bar {
+    padding-top: env(safe-area-inset-top);
+    height: calc(50px + env(safe-area-inset-top));
+  }
+
+  .demo-badge {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .demo-overlay {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgba(10, 12, 18, 0.7);
+  }
+
+  .demo-window {
+    background: var(--glass-solid);
+  }
+}
+
+/* "Live demo" button on project cards: the site's primary button */
+.projects-section .links a.demo-link {
+  background: linear-gradient(180deg, rgba(92, 134, 255, 0.95), rgba(47, 95, 230, 0.95));
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 6px 18px var(--accent-glow);
+  color: #fff;
+}
+
+.projects-section .links a.demo-link:hover {
+  background: linear-gradient(180deg, rgba(92, 134, 255, 1), rgba(31, 70, 184, 1));
+  color: #fff;
+}
