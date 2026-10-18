@@ -15,10 +15,17 @@
   --surface: #ffffff;
   --border: #e3e6ea;
   --border-strong: #cfd4db;
-  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.08);
-  --shadow-md: 0 8px 24px rgba(16, 24, 40, 0.10);
-  --radius: 14px;
-  --radius-sm: 8px;
+  /* Liquid glass surfaces */
+  --glass-bg: rgba(255, 255, 255, 0.52);
+  --glass-bg-strong: rgba(255, 255, 255, 0.68);
+  --glass-border: rgba(255, 255, 255, 0.75);
+  --glass-edge: rgba(26, 28, 32, 0.07);
+  --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 0 rgba(255, 255, 255, 0.35);
+  --glass-blur: blur(22px) saturate(170%);
+  --shadow-sm: 0 2px 6px rgba(31, 38, 135, 0.05), 0 10px 30px rgba(31, 38, 135, 0.07);
+  --shadow-md: 0 6px 14px rgba(31, 38, 135, 0.08), 0 18px 48px rgba(31, 38, 135, 0.12);
+  --radius: 24px;
+  --radius-sm: 14px;
   --radius-pill: 999px;
   --container: 1100px;
   --gutter: clamp(20px, 5vw, 56px);
@@ -58,6 +65,72 @@ body {
   color: var(--text-color);
   background-color: var(--background-color);
   -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* Soft colour field that the glass surfaces refract */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(42% 36% at 12% 8%, rgba(99, 140, 255, 0.34), transparent 70%),
+    radial-gradient(38% 34% at 88% 14%, rgba(170, 120, 255, 0.26), transparent 70%),
+    radial-gradient(44% 40% at 78% 78%, rgba(60, 200, 190, 0.24), transparent 70%),
+    radial-gradient(40% 36% at 14% 86%, rgba(255, 150, 190, 0.22), transparent 70%),
+    linear-gradient(180deg, #f7f8fb 0%, #f2f4f8 100%);
+}
+
+/* Glass surface primitive */
+.glass,
+.education-section li,
+.experience-section li,
+.projects-section li,
+.skills-section .cells .cell,
+.testimony-section .group,
+.contact-section .group form,
+.resume-frame,
+nav,
+.topnav {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-highlight), 0 0 0 1px var(--glass-edge), var(--shadow-sm);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass,
+  .education-section li,
+  .experience-section li,
+  .projects-section li,
+  .skills-section .cells .cell,
+  .testimony-section .group,
+  .contact-section .group form,
+  .resume-frame,
+  nav,
+  .topnav {
+    background: rgba(255, 255, 255, 0.92);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass,
+  .education-section li,
+  .experience-section li,
+  .projects-section li,
+  .skills-section .cells .cell,
+  .testimony-section .group,
+  .contact-section .group form,
+  .resume-frame,
+  nav,
+  .topnav {
+    background: #fff;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }
 
 img,
@@ -133,10 +206,7 @@ main > section > h2 + .group {
 .projects-section li,
 .skills-section .cells .cell,
 .testimony-section .group {
-  background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
 }
 
 .education-section li,
@@ -151,8 +221,8 @@ main > section > h2 + .group {
 .experience-section li:hover,
 .projects-section li:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--border-strong);
+  background: var(--glass-bg-strong);
+  box-shadow: var(--glass-highlight), 0 0 0 1px var(--glass-edge), var(--shadow-md);
 }
 
 .education-card {
@@ -221,8 +291,9 @@ main > section > h2 + .group {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--text-muted);
-  background: var(--background-color);
-  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 0 0 1px var(--glass-edge);
   border-radius: var(--radius-pill);
   padding: 5px 12px;
 }
@@ -235,9 +306,12 @@ main > section > h2 + .group {
   align-items: center;
   gap: 8px;
   padding: 9px 16px;
-  border: 1.5px solid var(--border-strong);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   border-radius: var(--radius-pill);
-  background: var(--surface);
+  background: rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  backdrop-filter: blur(14px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 0 0 1px var(--glass-edge), 0 2px 8px rgba(31, 38, 135, 0.06);
   color: var(--text-color);
   font-size: 14.5px;
   font-weight: 500;
@@ -249,20 +323,20 @@ main > section > h2 + .group {
 .hero-section .text .links a:hover,
 .projects-section .links a:hover,
 .contact-section .links a:hover {
-  border-color: var(--link-color);
   color: var(--link-color);
-  background: var(--accent-soft);
+  background: rgba(255, 255, 255, 0.78);
+  transform: translateY(-1px);
 }
 
 .hero-section .text .links a.primary {
-  background: var(--link-color);
-  border-color: var(--link-color);
+  background: linear-gradient(180deg, rgba(92, 134, 255, 0.95), rgba(47, 95, 230, 0.95));
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 6px 18px rgba(47, 95, 230, 0.35);
   color: #fff;
 }
 
 .hero-section .text .links a.primary:hover {
-  background: var(--link-hover);
-  border-color: var(--link-hover);
+  background: linear-gradient(180deg, rgba(92, 134, 255, 1), rgba(31, 70, 184, 1));
   color: #fff;
 }
 
@@ -276,19 +350,18 @@ main > section > h2 + .group {
 
 nav {
   position: sticky;
-  top: 0;
+  top: 12px;
   z-index: 50;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  height: 68px;
-  padding: 0 var(--gutter);
-  background: rgba(246, 247, 249, 0.88);
-  -webkit-backdrop-filter: saturate(180%) blur(12px);
-  backdrop-filter: saturate(180%) blur(12px);
-  border-bottom: 1px solid var(--border);
-  margin-bottom: clamp(40px, 7vw, 80px);
+  height: 64px;
+  width: calc(100% - 2 * var(--gutter));
+  max-width: var(--container);
+  margin: 12px auto clamp(40px, 7vw, 80px);
+  padding: 0 10px 0 22px;
+  border-radius: var(--radius-pill);
 }
 
 nav .left a {
@@ -318,18 +391,19 @@ nav .right a {
 
 nav .right a:hover {
   color: var(--text-color);
-  background: rgba(26, 28, 32, 0.06);
+  background: rgba(255, 255, 255, 0.7);
 }
 
 nav .right a:last-child {
   color: #fff;
-  background-color: var(--text-color);
+  background: linear-gradient(180deg, rgba(60, 64, 72, 0.98), rgba(26, 28, 32, 0.98));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 4px 12px rgba(26, 28, 32, 0.25);
   margin-left: 6px;
   padding: 8px 16px;
 }
 
 nav .right a:last-child:hover {
-  background-color: #000;
+  background: linear-gradient(180deg, rgba(40, 44, 52, 1), rgba(0, 0, 0, 1));
 }
 
 /* --------------------------------------------------------------------------
@@ -354,7 +428,9 @@ nav .right a:last-child:hover {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--link-color);
-  background: var(--accent-soft);
+  background: rgba(47, 95, 230, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
   border-radius: var(--radius-pill);
   padding: 6px 14px;
   margin-bottom: 20px;
@@ -396,8 +472,8 @@ nav .right a:last-child:hover {
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 50%;
-  border: 6px solid var(--surface);
-  box-shadow: 0 0 0 1px var(--border), var(--shadow-md);
+  border: 6px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 0 1px var(--glass-edge), inset 0 1px 0 rgba(255, 255, 255, 0.9), var(--shadow-md);
 }
 
 /* --------------------------------------------------------------------------
@@ -421,8 +497,8 @@ nav .right a:last-child:hover {
 
 .skills-section .cells .cell:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--border-strong);
+  background: var(--glass-bg-strong);
+  box-shadow: var(--glass-highlight), 0 0 0 1px var(--glass-edge), var(--shadow-md);
 }
 
 .skills-section .cells .cell img {
@@ -491,8 +567,9 @@ nav .right a:last-child:hover {
   object-fit: contain;
   border-radius: 4px;
   padding: 3px;
-  background: var(--background-color);
-  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 0 1px var(--glass-edge);
   box-sizing: content-box;
 }
 
@@ -537,7 +614,7 @@ nav .right a:last-child:hover {
   font-size: 96px;
   line-height: 1;
   font-weight: 600;
-  color: var(--accent-soft);
+  color: rgba(47, 95, 230, 0.16);
   pointer-events: none;
 }
 
@@ -603,10 +680,7 @@ nav .right a:last-child:hover {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
   padding: 28px;
 }
 
@@ -624,9 +698,10 @@ nav .right a:last-child:hover {
   font-family: var(--font);
   font-size: 15px;
   color: var(--text-color);
-  border: 1.5px solid var(--border-strong);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: var(--radius-sm);
-  background-color: var(--background-color);
+  background-color: rgba(255, 255, 255, 0.55);
+  box-shadow: inset 0 1px 2px rgba(26, 28, 32, 0.06), 0 0 0 1px var(--glass-edge);
   padding: 11px 13px;
   margin-bottom: 18px;
   outline: none;
@@ -640,14 +715,13 @@ nav .right a:last-child:hover {
 
 .contact-section .group form input:hover,
 .contact-section .group form textarea:hover {
-  border-color: var(--text-faint);
+  background-color: rgba(255, 255, 255, 0.75);
 }
 
 .contact-section .group form input:focus,
 .contact-section .group form textarea:focus {
-  border-color: var(--link-color);
-  background-color: var(--surface);
-  box-shadow: 0 0 0 3px var(--accent-soft);
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: inset 0 1px 2px rgba(26, 28, 32, 0.04), 0 0 0 3px rgba(47, 95, 230, 0.22);
 }
 
 .contact-section .group form button {
@@ -655,16 +729,17 @@ nav .right a:last-child:hover {
   font-size: 15px;
   font-weight: 500;
   color: #fff;
-  background-color: var(--link-color);
-  border: none;
+  background: linear-gradient(180deg, rgba(92, 134, 255, 0.95), rgba(47, 95, 230, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 6px 18px rgba(47, 95, 230, 0.35);
   border-radius: var(--radius-pill);
   height: 48px;
   cursor: pointer;
-  transition: background-color 0.15s ease, transform 0.15s ease;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
 .contact-section .group form button:hover {
-  background-color: var(--link-hover);
+  background: linear-gradient(180deg, rgba(92, 134, 255, 1), rgba(31, 70, 184, 1));
 }
 
 .contact-section .group form button:active {
@@ -691,10 +766,7 @@ nav .right a:last-child:hover {
 }
 
 .resume-frame {
-  background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
   padding: 12px;
   margin-top: 40px;
 }
@@ -709,8 +781,8 @@ nav .right a:last-child:hover {
 
 .resume-frame:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--border-strong);
+  background: var(--glass-bg-strong);
+  box-shadow: var(--glass-highlight), 0 0 0 1px var(--glass-edge), var(--shadow-md);
 }
 
 .resume-frame img {
@@ -736,7 +808,8 @@ nav .right a:last-child:hover {
    -------------------------------------------------------------------------- */
 
 .site-footer {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 1px 0 var(--glass-edge);
   padding: 28px var(--gutter) 40px;
   display: flex;
   flex-wrap: wrap;
@@ -793,7 +866,11 @@ nav .right a:last-child:hover {
 
 @media (max-width: 740px) {
   nav {
-    height: 60px;
+    top: 8px;
+    height: 56px;
+    width: calc(100% - 2 * var(--gutter));
+    margin-top: 8px;
+    padding: 0 6px 0 16px;
   }
 
   nav .right a {
@@ -971,7 +1048,8 @@ nav .right a:last-child:hover {
 
   .skills-section .cells .cell:hover {
     transform: none;
-    box-shadow: var(--shadow-sm);
+    background: var(--glass-bg);
+    box-shadow: var(--glass-highlight), 0 0 0 1px var(--glass-edge), var(--shadow-sm);
   }
 
   .skills-section .cells .cell img {
