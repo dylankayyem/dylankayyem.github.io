@@ -50,10 +50,6 @@
   --input-bg-focus: rgba(255, 255, 255, 0.9);
   --input-border: rgba(255, 255, 255, 0.9);
   --input-shadow: inset 0 1px 2px rgba(26, 28, 32, 0.06);
-  /* Plates behind dark brand logos (transparent in light mode) */
-  --logo-plate-bg: transparent;
-  --logo-plate-pad: 0;
-  --icon-plate-bg: transparent;
   --headshot-ring: rgba(255, 255, 255, 0.7);
   --footer-border: rgba(255, 255, 255, 0.8);
   --radius: 24px;
@@ -296,10 +292,6 @@ main > section > h2 + .group {
   max-width: min(240px, 60vw);
   object-fit: contain;
   object-position: left center;
-  box-sizing: content-box;
-  padding: var(--logo-plate-pad);
-  background: var(--logo-plate-bg);
-  border-radius: 10px;
 }
 
 /* Square marks get a little more height */
@@ -594,7 +586,6 @@ nav .right .theme-toggle .icon-sun {
   flex-shrink: 0;
   object-fit: contain;
   border-radius: 6px;
-  background: var(--icon-plate-bg);
 }
 
 .skills-section .cells .cell span {
@@ -976,8 +967,8 @@ nav .right .theme-toggle .icon-sun {
   --control-border: rgba(255, 255, 255, 0.16);
   --control-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.14);
   --control-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --chip-bg: rgba(255, 255, 255, 0.92);
-  --chip-border: rgba(255, 255, 255, 0.25);
+  --chip-bg: rgba(255, 255, 255, 0.08);
+  --chip-border: rgba(255, 255, 255, 0.14);
   --accent-tint: rgba(138, 176, 255, 0.14);
   --accent-ring: rgba(138, 176, 255, 0.30);
   --accent-glow: rgba(47, 95, 230, 0.45);
@@ -992,9 +983,6 @@ nav .right .theme-toggle .icon-sun {
   --input-bg-focus: rgba(255, 255, 255, 0.12);
   --input-border: rgba(255, 255, 255, 0.14);
   --input-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
-  --logo-plate-bg: rgba(255, 255, 255, 0.94);
-  --logo-plate-pad: 6px 10px;
-  --icon-plate-bg: rgba(255, 255, 255, 0.92);
   --headshot-ring: rgba(255, 255, 255, 0.14);
   --footer-border: rgba(255, 255, 255, 0.10);
   }
@@ -1036,8 +1024,8 @@ nav .right .theme-toggle .icon-sun {
   --control-border: rgba(255, 255, 255, 0.16);
   --control-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.14);
   --control-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --chip-bg: rgba(255, 255, 255, 0.92);
-  --chip-border: rgba(255, 255, 255, 0.25);
+  --chip-bg: rgba(255, 255, 255, 0.08);
+  --chip-border: rgba(255, 255, 255, 0.14);
   --accent-tint: rgba(138, 176, 255, 0.14);
   --accent-ring: rgba(138, 176, 255, 0.30);
   --accent-glow: rgba(47, 95, 230, 0.45);
@@ -1052,9 +1040,6 @@ nav .right .theme-toggle .icon-sun {
   --input-bg-focus: rgba(255, 255, 255, 0.12);
   --input-border: rgba(255, 255, 255, 0.14);
   --input-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
-  --logo-plate-bg: rgba(255, 255, 255, 0.94);
-  --logo-plate-pad: 6px 10px;
-  --icon-plate-bg: rgba(255, 255, 255, 0.92);
   --headshot-ring: rgba(255, 255, 255, 0.14);
   --footer-border: rgba(255, 255, 255, 0.10);
 }
@@ -1068,15 +1053,31 @@ nav .right .theme-toggle .icon-sun {
     linear-gradient(180deg, #0b0d12 0%, #0f121a 100%);
 }
 
-/* Keep the stacked brand marks on one shared plate in dark mode */
-:root[data-theme="dark"] .experience-section .brands img,
-:root:not([data-theme="light"]) .experience-section .brands img {
-  border-radius: 10px;
-}
-
 /* The resume preview is a white page; give it a quiet frame on dark glass */
 :root[data-theme="dark"] .resume-frame img {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+/* Theme-specific artwork: monochrome logos ship a light variant for dark mode */
+img.dark-only {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) img.light-only {
+    display: none;
+  }
+  :root:not([data-theme="light"]) img.dark-only {
+    display: block;
+  }
+}
+
+:root[data-theme="dark"] img.light-only {
+  display: none;
+}
+
+:root[data-theme="dark"] img.dark-only {
+  display: block;
 }
 
 /* --------------------------------------------------------------------------
