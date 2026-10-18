@@ -50,7 +50,16 @@
   --input-bg-focus: rgba(255, 255, 255, 0.9);
   --input-border: rgba(255, 255, 255, 0.9);
   --input-shadow: inset 0 1px 2px rgba(26, 28, 32, 0.06);
-  --headshot-ring: rgba(255, 255, 255, 0.7);
+  --mono-base: #e9edf6;
+  --mono-c1: rgba(79, 124, 255, 0.80);
+  --mono-c2: rgba(165, 110, 255, 0.62);
+  --mono-c3: rgba(45, 196, 184, 0.62);
+  --mono-c4: rgba(255, 140, 185, 0.55);
+  --mono-glass: rgba(255, 255, 255, 0.40);
+  --mono-sheen: rgba(255, 255, 255, 0.34);
+  --mono-ink-top: #171a20;
+  --mono-ink-bottom: #3b4454;
+  --mono-shadow: rgba(26, 28, 32, 0.16);
   --footer-border: rgba(255, 255, 255, 0.8);
   --radius: 24px;
   --radius-sm: 14px;
@@ -541,18 +550,131 @@ nav .right .theme-toggle .icon-sun {
   margin-top: 28px;
 }
 
-.hero-section .headshot {
+.hero-section .hero-visual {
   display: flex;
   justify-content: flex-end;
 }
 
-.hero-section .headshot img {
-  width: min(340px, 100%);
+/* Animated "DK" monogram: a drifting colour field under a frosted glass tile,
+   with the initials drawn in on load. The resting styles are the finished
+   state, so the reduced-motion rule above simply shows the final frame. */
+.monogram {
+  position: relative;
+  width: min(320px, 100%);
   aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 6px solid var(--headshot-ring);
+  border-radius: 27%;
+  overflow: hidden;
+  isolation: isolate;
+  transform: translateZ(0);
   box-shadow: 0 0 0 1px var(--glass-edge), var(--shadow-md);
+}
+
+.monogram .field {
+  position: absolute;
+  inset: -20%;
+  background: var(--mono-base);
+}
+
+.monogram .field::before,
+.monogram .field::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  filter: blur(26px);
+  will-change: transform;
+  animation: mono-drift 16s ease-in-out infinite alternate;
+}
+
+.monogram .field::before {
+  background:
+    radial-gradient(closest-side at 30% 32%, var(--mono-c1), transparent 72%),
+    radial-gradient(closest-side at 72% 68%, var(--mono-c2), transparent 72%);
+}
+
+.monogram .field::after {
+  background:
+    radial-gradient(closest-side at 68% 26%, var(--mono-c3), transparent 72%),
+    radial-gradient(closest-side at 26% 74%, var(--mono-c4), transparent 72%);
+  animation-duration: 22s;
+  animation-direction: alternate-reverse;
+}
+
+.monogram .glass-layer {
+  position: absolute;
+  inset: 0;
+  background: var(--mono-glass);
+  -webkit-backdrop-filter: blur(14px) saturate(165%);
+  backdrop-filter: blur(14px) saturate(165%);
+  box-shadow: var(--glass-highlight), inset 0 0 0 1px var(--glass-border);
+  overflow: hidden;
+}
+
+.monogram .glass-layer::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(115deg, transparent 42%, var(--mono-sheen) 50%, transparent 58%);
+  transform: translateX(-60%);
+  animation: mono-sheen 9s ease-in-out 2.4s infinite;
+}
+
+.monogram svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.monogram .ink-top {
+  stop-color: var(--mono-ink-top);
+}
+
+.monogram .ink-bottom {
+  stop-color: var(--mono-ink-bottom);
+}
+
+.monogram .letters {
+  filter: drop-shadow(0 8px 18px var(--mono-shadow));
+}
+
+.monogram .letter {
+  fill: url(#mono-ink);
+  fill-opacity: 1;
+  stroke: url(#mono-ink);
+  stroke-opacity: 0;
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation:
+    mono-draw 1.5s cubic-bezier(0.65, 0, 0.35, 1) both,
+    mono-fill 0.7s ease-out 1.2s both;
+}
+
+.monogram .letter.k {
+  animation-delay: 0.3s, 1.5s;
+}
+
+@keyframes mono-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes mono-fill {
+  from { fill-opacity: 0; stroke-opacity: 1; }
+  to { fill-opacity: 1; stroke-opacity: 0; }
+}
+
+@keyframes mono-drift {
+  from { transform: translate(-6%, -4%) rotate(0deg) scale(1); }
+  to { transform: translate(6%, 5%) rotate(28deg) scale(1.14); }
+}
+
+@keyframes mono-sheen {
+  0% { transform: translateX(-60%); }
+  30%, 100% { transform: translateX(60%); }
 }
 
 /* --------------------------------------------------------------------------
@@ -983,7 +1105,16 @@ nav .right .theme-toggle .icon-sun {
   --input-bg-focus: rgba(255, 255, 255, 0.12);
   --input-border: rgba(255, 255, 255, 0.14);
   --input-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
-  --headshot-ring: rgba(255, 255, 255, 0.14);
+  --mono-base: #181d2e;
+  --mono-c1: rgba(96, 136, 255, 0.78);
+  --mono-c2: rgba(160, 108, 255, 0.62);
+  --mono-c3: rgba(44, 186, 176, 0.58);
+  --mono-c4: rgba(255, 120, 175, 0.44);
+  --mono-glass: rgba(22, 26, 38, 0.26);
+  --mono-sheen: rgba(255, 255, 255, 0.16);
+  --mono-ink-top: #ffffff;
+  --mono-ink-bottom: #c5cee0;
+  --mono-shadow: rgba(0, 0, 0, 0.45);
   --footer-border: rgba(255, 255, 255, 0.10);
   }
 
@@ -1040,7 +1171,16 @@ nav .right .theme-toggle .icon-sun {
   --input-bg-focus: rgba(255, 255, 255, 0.12);
   --input-border: rgba(255, 255, 255, 0.14);
   --input-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
-  --headshot-ring: rgba(255, 255, 255, 0.14);
+  --mono-base: #181d2e;
+  --mono-c1: rgba(96, 136, 255, 0.78);
+  --mono-c2: rgba(160, 108, 255, 0.62);
+  --mono-c3: rgba(44, 186, 176, 0.58);
+  --mono-c4: rgba(255, 120, 175, 0.44);
+  --mono-glass: rgba(22, 26, 38, 0.26);
+  --mono-sheen: rgba(255, 255, 255, 0.16);
+  --mono-ink-top: #ffffff;
+  --mono-ink-bottom: #c5cee0;
+  --mono-shadow: rgba(0, 0, 0, 0.45);
   --footer-border: rgba(255, 255, 255, 0.10);
 }
 
@@ -1229,14 +1369,19 @@ img.dark-only {
     text-align: left;
   }
 
-  .hero-section .headshot {
+  .hero-section .hero-visual {
     order: -1;
     justify-content: flex-start;
   }
 
-  .hero-section .headshot img {
-    width: 160px;
-    border-width: 4px;
+  .monogram {
+    width: 148px;
+    border-radius: 26%;
+  }
+
+  .monogram .field::before,
+  .monogram .field::after {
+    filter: blur(14px);
   }
 
   .hero-section h1 {

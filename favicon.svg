@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4f7cff"/>
+      <stop offset="0.55" stop-color="#7a5cff"/>
+      <stop offset="1" stop-color="#2cc4b6"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.28"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.04"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="92" fill="url(#bg)"/>
+  <rect width="400" height="400" rx="92" fill="url(#sheen)"/>
+  <rect x="1.5" y="1.5" width="397" height="397" rx="90.5" fill="none" stroke="#ffffff" stroke-opacity="0.38" stroke-width="3"/>
+  <g fill="#ffffff" transform="translate(200 200) scale(1.08) translate(-200 -200) translate(-5.29 -0.34)">
+    <path d="M114.44 120.07Q139.74 120.07 158.95 129.97Q178.15 139.85 188.62 158.14Q199.08 176.43 199.08 200.57Q199.08 224.73 188.62 242.78Q178.15 260.84 158.95 270.73Q139.74 280.62 114.44 280.62L58.32 280.62L58.32 120.07L114.44 120.07M113.29 253.25Q138.59 253.25 152.39 239.44Q166.19 225.65 166.19 200.57Q166.19 175.50 152.39 161.36Q138.59 147.22 113.29 147.22L90.52 147.22L90.52 253.25"/>
+    <path d="M352.26 280.62L311.55 280.62L253.13 209.09L253.13 280.62L220.93 280.62L220.93 120.07L253.13 120.07L253.13 192.06L311.55 120.07L350.42 120.07L284.18 199.66"/>
+  </g>
+</svg>
