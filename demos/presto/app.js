@@ -16,7 +16,7 @@
     name: 'Presto redesign', kind: 'Coded prototype · heuristic evaluation', ratio: 0.5,
     blurb: 'A redesign of the Toronto transit card app after a heuristic evaluation: clearer sign-in errors, an easier way back, and a load-funds flow that shows the amount and payment before you commit.',
     hint: 'This one is coded from the UI library rather than images, so every field and button works.',
-    start: 'terms',
+    start: 'terms', signedIn: 'home', goal: 'done',
     order: ['terms', 'signin', 'home', 'load', 'done'],
     initialState: function () { return { balance: 12.4, amount: 20, method: 'visa', error: false, email: 'commuter@example.com', history: [{ t: 'Fare · TTC Union Station', a: -3.3 }, { t: 'Fare · GO Transit Oakville', a: -6.85 }, { t: 'Loaded · Visa •• 4821', a: 20 }] }; },
     screens: {

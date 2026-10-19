@@ -329,19 +329,20 @@
 
   document.addEventListener('click', function (e) {
     var el;
-    if (e.target.closest('[data-send-event]')) { sendTestEvent(); return; }
+    if (e.target.closest('[data-send-event]')) { sendTestEvent(); D.action('test_event'); return; }
     if ((el = e.target.closest('[data-trace-f]'))) { traceFilter = el.dataset.traceF; D.render(); return; }
     if ((el = e.target.closest('[data-inc-f]'))) { incFilter = el.dataset.incF; D.render(); return; }
     if ((el = e.target.closest('[data-inc-act]'))) {
       var inc = incidents.find(function (x) { return x.id === el.dataset.id; });
-      if (el.dataset.incAct === 'ack') { inc.status = 'ACKNOWLEDGED'; inc.history.push({ at: new Date(), text: 'Acknowledged by Dylan Kayyem' }); D.toast('Incident acknowledged'); }
-      else { inc.status = 'RESOLVED'; inc.history.push({ at: new Date(), text: 'Resolved by Dylan Kayyem' }); D.toast('Incident resolved'); }
+      if (el.dataset.incAct === 'ack') { inc.status = 'ACKNOWLEDGED'; inc.history.push({ at: new Date(), text: 'Acknowledged by Dylan Kayyem' }); D.toast('Incident acknowledged'); D.action('incident_ack'); }
+      else { inc.status = 'RESOLVED'; inc.history.push({ at: new Date(), text: 'Resolved by Dylan Kayyem' }); D.toast('Incident resolved'); D.action('incident_resolve'); }
       D.render(); return;
     }
-    if ((el = e.target.closest('[data-revoke]'))) { keys.find(function (k) { return k.id === el.dataset.revoke; }).revoked = true; D.toast('Key revoked. Requests using it now get 401.'); D.render(); return; }
+    if ((el = e.target.closest('[data-revoke]'))) { keys.find(function (k) { return k.id === el.dataset.revoke; }).revoked = true; D.toast('Key revoked. Requests using it now get 401.'); D.action('key_revoke'); D.render(); return; }
     if (e.target.closest('[data-new-key]')) {
       var raw = 'fp_live_' + Array.from({ length: 28 }, function () { return 'abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'[Math.floor(Math.random() * 56)]; }).join('');
       keys.unshift({ id: 'key_' + Date.now(), name: 'New key', prefix: raw.slice(0, 12), created: new Date(), used: null, revoked: false });
+      D.action('key_create');
       D.render();
       document.getElementById('new-key-slot').innerHTML = '<div class="alert ok">' + D.icon('check') + '<div class="txt"><b>Copy this key now; it won\'t be shown again.</b><div class="mono" style="margin-top:6px;word-break:break-all">' + raw + '</div></div></div>';
       return;
@@ -351,6 +352,7 @@
 
   D.init({
     id: 'flowproof', name: 'FlowProof', icon: 'traces', defaultView: 'overview', navLabel: 'Monitoring',
+    goals: ['test_event'],
     user: { name: 'Dylan Kayyem', initials: 'DK', org: 'Acme Vans' },
     login: { heading: 'Sign in to FlowProof', sub: 'Monitor whether your automations actually did their job.', email: 'demo@flowproof.dev', foot: 'Authentication in the real app is handled by Clerk organizations.' },
     nav: [

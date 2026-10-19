@@ -201,22 +201,23 @@
 
   document.addEventListener('click', function (e) {
     var el;
-    if ((el = e.target.closest('[data-q]'))) { activeQ = el.dataset.q; D.render(); return; }
+    if ((el = e.target.closest('[data-q]'))) { activeQ = el.dataset.q; D.action('query_run'); D.render(); return; }
     if ((el = e.target.closest('[data-appt]'))) { apptDay = el.dataset.appt; D.render(); return; }
     if ((el = e.target.closest('[data-book]'))) {
       var p = patients.find(function (x) { return x.id === el.dataset.book; }), when = new Date(today.getTime() + 3 * DAY + 10 * 3600000);
       appts.push({ id: 'A' + (6000 + appts.length), patient: p, doctor: pick(doctors), at: when, reason: 'Follow-up visit' });
       appts.sort(function (a, b) { return a.at - b.at; });
-      D.toast('Appointment booked for ' + dateStr(when) + ' at ' + timeStr(when)); D.render(); return;
+      D.toast('Appointment booked for ' + dateStr(when) + ' at ' + timeStr(when)); D.action('appointment_booked'); D.render(); return;
     }
     if (e.target.closest('[data-add-patient]')) {
       var n = person(), d = pick(DISEASES), np = { id: 'P' + (1001 + patients.length), name: n, address: '1300 Pearl St, Boulder, CO', phone: phone(), email: email(n), reg: new Date(), disease: d[0], rx: d[1] };
-      patients.unshift(np); D.toast('Registered ' + n + ' as ' + np.id); D.go('patients', np.id);
+      patients.unshift(np); D.toast('Registered ' + n + ' as ' + np.id); D.action('patient_registered'); D.go('patients', np.id);
     }
   });
 
   D.init({
     id: 'healthcare', name: 'Demo General Hospital', icon: 'db', defaultView: 'dashboard', navLabel: 'Hospital records',
+    goals: ['query_run', 'appointment_booked', 'patient_registered'],
     user: { name: 'Dylan Kayyem', initials: 'DK', org: 'Administrator' },
     login: { heading: 'Staff sign in', sub: 'Healthcare organization database: patients, staff, rooms, appointments and billing.', email: 'admin@demo-hospital.example', foot: 'Next.js · PostgreSQL · seeded sample data. No real patient information.' },
     nav: [

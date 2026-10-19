@@ -104,6 +104,26 @@
     return Math.round(s / 86400) + 'd ago';
   }
 
+  // ---- analytics ------------------------------------------------------------
+  // Demo funnel: demo_open (direct visits only; the overlay reports its own) →
+  // demo_signin → demo_view per screen → demo_action → demo_complete the
+  // first time a goal action happens. analytics.js forwards these to the
+  // portfolio page when the demo runs inside the overlay.
+  var startedAt = Date.now(), lastView = null, completed = false;
+  function track(name, props) {
+    if (!window.DKAnalytics || !app) return;
+    var data = { demo: app.id };
+    for (var k in props || {}) data[k] = props[k];
+    window.DKAnalytics.track(name, data);
+  }
+  function action(name) {
+    track('demo_action', { action: name });
+    if (!completed && (app.goals || []).indexOf(name) >= 0) {
+      completed = true;
+      track('demo_complete', { action: name, seconds: Math.round((Date.now() - startedAt) / 1000) });
+    }
+  }
+
   // ---- app ----------------------------------------------------------------
   var app = null;
   function authKey() { return 'demo:' + app.id + ':auth'; }
@@ -133,7 +153,7 @@
     qs('#login-form').addEventListener('submit', function (e) {
       e.preventDefault();
       var btn = qs('button[type=submit]', e.target); btn.disabled = true; btn.textContent = 'Signing in…';
-      setTimeout(function () { setAuthed(true); go(app.defaultView); }, 450);
+      setTimeout(function () { setAuthed(true); track('demo_signin'); go(app.defaultView); }, 450);
     });
   }
 
@@ -152,7 +172,7 @@
       '<div class="content" id="content"></div></div></div>';
     document.body.addEventListener('click', function (e) {
       var nl = e.target.closest('.navlink[data-view]'); if (nl) { go(nl.dataset.view); return; }
-      if (e.target.closest('[data-signout]')) { setAuthed(false); location.hash = ''; renderLogin(); return; }
+      if (e.target.closest('[data-signout]')) { setAuthed(false); lastView = null; location.hash = ''; renderLogin(); return; }
       var g = e.target.closest('[data-go]'); if (g) { var p = g.dataset.go.split('/'); go(p[0], p.slice(1).join('/') || null); return; }
     });
   }
@@ -162,6 +182,8 @@
     if (!qs('.app')) renderShell();
     var r = route();
     var view = app.views[r.view] || app.views[app.defaultView];
+    var viewName = (app.views[r.view] ? r.view : app.defaultView) + (r.param ? '/detail' : '');
+    if (viewName !== lastView) { lastView = viewName; track('demo_view', { view: viewName }); }
     document.querySelectorAll('.navlink').forEach(function (b) { b.classList.toggle('active', b.dataset.view === (app.views[r.view] ? r.view : app.defaultView)); });
     var out = view(r.param) || {};
     qs('#page-title').textContent = out.title || '';
@@ -179,9 +201,10 @@
   function init(config) {
     app = config;
     if (params.get('restart') === '1') { setAuthed(false); location.hash = ''; }
+    if (window.parent === window && params.get('via') !== 'overlay') track('demo_open', { source: 'direct' });
     window.addEventListener('hashchange', renderView);
     renderView();
   }
 
-  window.Demo = { init: init, go: go, icon: icon, esc: esc, stat: stat, badge: badge, table: table, bars: bars, card: card, kv: kv, toast: toast, rng: rng, fmtTime: fmtTime, ago: ago, render: function () { renderView(); } };
+  window.Demo = { init: init, go: go, action: action, icon: icon, esc: esc, stat: stat, badge: badge, table: table, bars: bars, card: card, kv: kv, toast: toast, rng: rng, fmtTime: fmtTime, ago: ago, render: function () { renderView(); } };
 })();

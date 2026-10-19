@@ -61,8 +61,9 @@ index.html  ── "Live demo" button (data-demo="flowproof")
 - State lives in memory and `sessionStorage`. *Restart* in the overlay reloads
   the demo from the sign-in screen with fresh sample data.
 - Demo pages carry `noindex`, so search engines don't index sample data.
-- Nothing is real: names, records, balances and keys are sample data, and no
-  request leaves the browser.
+- Nothing is real: names, records, balances and keys are sample data. The
+  only requests a demo makes are anonymous analytics events (which view, which
+  action), never anything typed into it.
 
 ## Adding or updating a demo
 
@@ -73,9 +74,12 @@ index.html  ── "Live demo" button (data-demo="flowproof")
 2. Write `demos/<id>/app.js` that builds sample data and calls
    `Demo.init({ id, name, icon, nav, views, login, user })`. Each view returns
    `{ title, crumbs, actions, html, after }`; use the helpers on `Demo`
-   (`stat`, `card`, `table`, `bars`, `kv`, `badge`, `toast`, `go`).
+   (`stat`, `card`, `table`, `bars`, `kv`, `badge`, `toast`, `go`). Call
+   `Demo.action('name')` for meaningful actions and list the ones that count
+   as finishing the demo in `goals`.
 3. Register it in the `DEMOS` map at the top of `demo.js`.
-4. Add the button to the project card in `index.html`:
+4. Load `../../analytics.js` before `../kit.js` in the demo's `index.html`.
+5. Add the button to the project card in `index.html`:
    `<a class="demo-link" href="demos/<id>/index.html" data-demo="<id>" …>`.
 
 **A design prototype:**
@@ -85,8 +89,10 @@ index.html  ── "Live demo" button (data-demo="flowproof")
 2. In `demos/<id>/app.js`, call `Proto.init({ screens, order, start })`. Each
    image screen lists tap targets as percentages of the image:
    `{ x, y, w, h, to: 'next-screen', toast: 'optional message' }`. A screen can
-   instead provide `html(state)` for a coded screen, as Presto does.
-3. Steps 3 and 4 above.
+   instead provide `html(state)` for a coded screen, as Presto does. Set
+   `signedIn` and `goal` (screen keys) if the analytics defaults, the second
+   and last screens, are wrong.
+3. Steps 3 to 5 above (with `../proto.js` instead of `../kit.js`).
 
 **Before pushing**, open each changed demo at phone width and desktop width in
 both themes, sign in, visit every view, and check the browser console is clean.
@@ -104,6 +110,6 @@ both themes, sign in, visit every view, and check the browser console is clean.
    this demo, which matches the current design.
 4. **Prototypes:** add the remaining PawPrints flows (messages, onboarding)
    when those screens are designed.
-5. **Measurement:** the site has no analytics yet. Add a privacy-friendly
-   counter for demo opens and completed flows (open → sign in → key action) to
-   see which projects visitors actually explore.
+5. **Measurement:** every demo reports a funnel (open → sign in → key action
+   → close, with time spent). See [ANALYTICS.md](ANALYTICS.md) for the events,
+   the reports to build, and the one setting left to turn it on.

@@ -853,12 +853,15 @@
     if (response.ok) {
       form.reset();
       statusDiv.innerHTML = "Thanks for your message! 👋";
+      if (window.DKAnalytics) DKAnalytics.track('contact_form', { status: 'sent' });
     } else {
       const data = await response.json();
       statusDiv.innerHTML = data.errors ? data.errors.map(error => error.message).join(", ") : "Oops! There was a problem submitting your form.";
+      if (window.DKAnalytics) DKAnalytics.track('contact_form', { status: 'error' });
     }
   } catch (error) {
     statusDiv.innerHTML = "Oops! There was a problem submitting your form.";
+    if (window.DKAnalytics) DKAnalytics.track('contact_form', { status: 'error' });
   }
   });
 
@@ -905,6 +908,7 @@
 });
 </script>
 
+<script src="analytics.js" defer></script>
 <script src="tooltip.js" defer></script>
 <script src="demo.js" defer></script>
 </body>

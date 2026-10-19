@@ -13,7 +13,11 @@
     presto: { title: 'Presto redesign', note: 'Coded prototype' },
     itsastart: { title: "It's a Start", note: 'Figma prototype' }
   };
-  var overlay = null, frame = null, titleEl = null, openBtn = null, current = null, lastFocus = null;
+  var overlay = null, frame = null, titleEl = null, openBtn = null, current = null, lastFocus = null, openedAt = 0;
+
+  // Demo funnel events (see ANALYTICS.md); a no-op when analytics.js is absent.
+  function track(name, props) { if (window.DKAnalytics) window.DKAnalytics.track(name, props); }
+  function seconds() { return Math.round((Date.now() - openedAt) / 1000); }
 
   function icon(d) {
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="' + d + '"/></svg>';
@@ -44,21 +48,22 @@
     overlay.addEventListener('click', function (e) {
       var act = e.target.closest('[data-act]');
       if (act) {
-        if (act.dataset.act === 'close') close();
-        if (act.dataset.act === 'restart') load(current, true);
+        if (act.dataset.act === 'close') close('button');
+        if (act.dataset.act === 'restart') { track('demo_restart', { demo: current, source: 'overlay' }); load(current, true); }
+        if (act.dataset.act === 'open') track('demo_new_tab', { demo: current, seconds: seconds() });
         return;
       }
-      if (e.target === overlay) close();
+      if (e.target === overlay) close('backdrop');
     });
     frame.addEventListener('load', function () { overlay.classList.remove('loading'); });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && overlay.classList.contains('open')) close();
+      if (e.key === 'Escape' && overlay.classList.contains('open')) close('esc');
     });
   }
 
-  function url(id, restart) {
+  function url(id, restart, via) {
     var theme = document.documentElement.getAttribute('data-theme') || 'light';
-    return 'demos/' + id + '/index.html?theme=' + theme + (restart ? '&restart=1' : '');
+    return 'demos/' + id + '/index.html?theme=' + theme + (restart ? '&restart=1' : '') + (via ? '&via=' + via : '');
   }
 
   function load(id, restart) {
@@ -66,23 +71,26 @@
     frame.src = url(id, restart);
   }
 
-  function open(id) {
+  function open(id, source) {
     if (!DEMOS[id]) return;
     if (!overlay) build();
     current = id;
     lastFocus = document.activeElement;
     titleEl.textContent = DEMOS[id].title;
     overlay.querySelector('.demo-badge').textContent = 'Demo · ' + DEMOS[id].note;
-    openBtn.href = url(id, false);
+    openBtn.href = url(id, false, 'overlay');
     load(id, false);
     overlay.classList.add('open');
     document.body.classList.add('demo-open');
+    openedAt = Date.now();
+    track('demo_open', { demo: id, source: source || 'card' });
     if (history.replaceState) history.replaceState(null, '', '#demo=' + id);
     setTimeout(function () { overlay.querySelector('.demo-close').focus(); }, 50);
   }
 
-  function close() {
+  function close(how) {
     if (!overlay || !overlay.classList.contains('open')) return;
+    track('demo_close', { demo: current, how: how || 'button', seconds: seconds() });
     overlay.classList.remove('open');
     document.body.classList.remove('demo-open');
     setTimeout(function () { frame.src = 'about:blank'; }, 250);
@@ -95,12 +103,18 @@
     var a = e.target.closest('[data-demo]');
     if (!a) return;
     e.preventDefault();
-    open(a.getAttribute('data-demo'));
+    open(a.getAttribute('data-demo'), 'card');
   });
 
   // Escape pressed inside a demo arrives as a message from the iframe.
   window.addEventListener('message', function (e) {
-    if (e.data && e.data.type === 'demo-close' && frame && e.source === frame.contentWindow) close();
+    if (e.data && e.data.type === 'demo-close' && frame && e.source === frame.contentWindow) close('esc');
+  });
+
+  // Leaving the page with a demo still open counts as a close, so time spent
+  // in the demo is still recorded.
+  window.addEventListener('pagehide', function () {
+    if (current && overlay && overlay.classList.contains('open')) track('demo_close', { demo: current, how: 'leave', seconds: seconds() });
   });
 
   // Keep the demo's theme in step when the visitor flips the site theme.
@@ -112,8 +126,8 @@
 
   var m = location.hash.match(/^#demo=([a-z]+)$/);
   if (m) {
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { open(m[1]); });
-    else open(m[1]);
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { open(m[1], 'link'); });
+    else open(m[1], 'link');
   }
-  window.openProjectDemo = open;
+  window.openProjectDemo = function (id) { open(id, 'script'); };
 })();

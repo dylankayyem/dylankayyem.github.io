@@ -14,6 +14,28 @@
 
   var cfg, current, showHot = false, toastTimer, history = [];
 
+  // Demo funnel (see ANALYTICS.md and kit.js): a view per screen, sign-in
+  // when the visitor reaches cfg.signedIn, and completion at cfg.goal.
+  var demoId = (location.pathname.match(/\/demos\/([a-z]+)\//) || [])[1] || 'prototype';
+  var startedAt = Date.now(), lastView = null, reached = {}, viaSteps = false;
+  function track(name, props) {
+    if (!window.DKAnalytics) return;
+    var data = { demo: demoId };
+    for (var k in props || {}) data[k] = props[k];
+    window.DKAnalytics.track(name, data);
+  }
+  function trackScreen() {
+    if (current === lastView) return;
+    lastView = current;
+    track('demo_view', { view: current });
+    var signedIn = cfg.signedIn || cfg.order[1], goal = cfg.goal || cfg.order[cfg.order.length - 1];
+    if (current === signedIn && !reached.signin) { reached.signin = true; track('demo_signin'); }
+    if (current === goal && !reached.goal) {
+      reached.goal = true;
+      track('demo_complete', { action: goal, via: viaSteps ? 'steps' : 'tap', seconds: Math.round((Date.now() - startedAt) / 1000) });
+    }
+  }
+
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 
   function toast(msg) {
@@ -46,6 +68,7 @@
     screen.classList.toggle('show-hot', showHot && !!s.img);
     document.querySelectorAll('.proto-steps button').forEach(function (b) { b.classList.toggle('on', b.dataset.step === current || (cfg.screens[current].step === b.dataset.step)); });
     var hint = document.querySelector('.proto-hint'); if (hint) hint.textContent = s.hint || cfg.hint || '';
+    trackScreen();
   }
 
   function build() {
@@ -61,10 +84,10 @@
 
     document.body.addEventListener('click', function (e) {
       var el;
-      if ((el = e.target.closest('[data-step]'))) { history = []; current = el.dataset.step; render(); return; }
+      if ((el = e.target.closest('[data-step]'))) { viaSteps = true; history = []; current = el.dataset.step; render(); return; }
       if ((el = e.target.closest('[data-tool]'))) {
         if (el.dataset.tool === 'hot') { showHot = !showHot; el.classList.toggle('on', showHot); render(); }
-        else { history = []; cfg.state = cfg.initialState ? cfg.initialState() : {}; current = cfg.start; render(); }
+        else { track('demo_restart', { source: 'demo' }); history = []; cfg.state = cfg.initialState ? cfg.initialState() : {}; current = cfg.start; render(); }
         return;
       }
       var s = cfg.screens[current];
@@ -90,9 +113,10 @@
   window.Proto = {
     init: function (config) {
       cfg = config; cfg.state = cfg.initialState ? cfg.initialState() : {};
+      if (window.parent === window && new URLSearchParams(location.search).get('via') !== 'overlay') track('demo_open', { source: 'direct' });
       current = cfg.start; build(); render();
       cfg.order.concat(Object.keys(cfg.screens)).forEach(function (k) { var s = cfg.screens[k]; if (s && s.img) { var i = new Image(); i.src = s.img; } });
     },
-    go: go, back: back, toast: toast, esc: esc, render: function () { render(); }
+    go: go, back: back, toast: toast, esc: esc, track: track, render: function () { render(); }
   };
 })();

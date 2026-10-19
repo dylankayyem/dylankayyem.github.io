@@ -169,7 +169,7 @@
           e.preventDefault(); var f = e.target, d = dById[+f.donor.value], h = hById[+f.hospital.value], amt = Math.max(1, Math.min(4, +f.amount.value || 1));
           var rec = { id: donations.length + 1, at: new Date(), donor: d, pro: f.pro.value || 'Staff', hospital: h, amount: amt };
           donations.push(rec); doById[rec.id] = rec; h.stock[d.type] += amt;
-          D.toast('Donation #' + rec.id + ' recorded · ' + h.county + ' ' + d.type + ' now ' + n(h.stock[d.type])); D.render();
+          D.toast('Donation #' + rec.id + ' recorded · ' + h.county + ' ' + d.type + ' now ' + n(h.stock[d.type])); D.action('donation'); D.render();
         });
       }
     };
@@ -222,12 +222,13 @@
       var don = { id: donations.length + 1, at: new Date(Date.now() - 86400000), donor: donor, pro: 'Dr. Bruce Banner', hospital: h, amount: 1 };
       donations.push(don); doById[don.id] = don;
       transfusions.push({ id: transfusions.length + 1, at: new Date(), donation: don, patient: p, pro: 'Dr. Bruce Banner', hospital: h, amount: 1 });
-      D.toast('Transfused 1 unit of ' + use + ' to ' + p.name + ' at ' + h.county); D.render();
+      D.toast('Transfused 1 unit of ' + use + ' to ' + p.name + ' at ' + h.county); D.action('transfusion'); D.render();
     }
   });
 
   D.init({
     id: 'bloodbank', name: 'Blood Bank', icon: 'drop', defaultView: 'dashboard', navLabel: 'Space Monkeys',
+    goals: ['transfusion', 'donation'],
     user: { name: 'Dylan Kayyem', initials: 'DK', org: 'Blood bank staff' },
     login: { heading: 'Blood bank sign in', sub: 'Inventory, donor–patient matching and transfusion records across Colorado hospitals.', email: 'staff@bloodbank.example', foot: 'Flask · SQLite · PostgreSQL. Uses the project’s own sample data.' },
     nav: [
