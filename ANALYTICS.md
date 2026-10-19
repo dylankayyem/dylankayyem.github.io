@@ -62,9 +62,11 @@ index.html ── demo.js (overlay)
    ```js
    websiteId: '00000000-0000-0000-0000-000000000000',
    ```
-4. **Exclude yourself.** On each of your own devices and browsers, visit
-   `https://dylankayyem.com/?analytics=off` once. It's remembered in that
-   browser. `?analytics=on` undoes it.
+4. **Exclude yourself.** On each of your own devices and browsers, open
+   <https://dylankayyem.com/analytics.html> and press **Don't count this
+   browser**. The page shows whether that browser is counted, isn't counted
+   itself, and isn't linked from the site. `?analytics=off` on any page does
+   the same thing.
 5. **Check it works.** In a private window, open the site, open a demo, sign
    in and do the key action. Within a few seconds Umami's **Realtime** view
    should show the page view, then `demo_open`, `demo_signin` and
@@ -142,13 +144,14 @@ match, look for the report type in brackets.
 Umami groups visits by `utm_source` and `utm_campaign`, and page views keep
 those tags. Use a tagged link wherever you post the site, for example:
 
-| Where | Link |
-| --- | --- |
-| LinkedIn profile | `https://dylankayyem.com/?utm_source=linkedin&utm_medium=profile` |
-| Resume PDF | `https://dylankayyem.com/?utm_source=resume` |
-| Job application | `https://dylankayyem.com/?utm_source=application&utm_campaign=<company>` |
-| GitHub profile README | `https://dylankayyem.com/?utm_source=github` |
-| Straight to a demo | `https://dylankayyem.com/?utm_source=linkedin#demo=flowproof` |
+| Where | Link | Status |
+| --- | --- | --- |
+| Resume PDF (`files/Dylan_Kayyem.pdf`) | `https://dylankayyem.com/?utm_source=resume`; the It's a Start entry links to `start.html?utm_source=resume` | Done: every contact line in the PDF is now clickable |
+| GitHub profile README | `https://dylankayyem.com/?utm_source=github` | Done |
+| LinkedIn profile (Contact info → Website, and Featured) | `https://dylankayyem.com/?utm_source=linkedin&utm_medium=profile` | To do on LinkedIn |
+| LinkedIn posts | `https://dylankayyem.com/?utm_source=linkedin&utm_medium=post` | Use when posting |
+| Job application | `https://dylankayyem.com/?utm_source=application&utm_campaign=<company>` | Use per application |
+| Straight to a demo | `https://dylankayyem.com/?utm_source=linkedin#demo=flowproof` | Use when sharing one project |
 
 ## Debugging
 

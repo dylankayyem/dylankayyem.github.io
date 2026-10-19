@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#f6f7f9">
+  <link rel="icon" href="favicon-96.png" type="image/png" sizes="96x96">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved === 'dark' || saved === 'light' ? saved : (dark ? 'dark' : 'light'));
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="chrome.css">
+  <title>Site Stats Settings</title>
+  <!-- Deliberately does not load analytics.js, so opening this page is never
+       counted. It flips the same switch as ?analytics=off|on|debug. -->
+  <style>
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; box-sizing: border-box; font-family: 'Poppins', system-ui, sans-serif; color: var(--text-color); background: var(--background-color); }
+    .panel { width: 100%; max-width: 440px; padding: 28px; border-radius: 24px; box-sizing: border-box; }
+    h1 { font-size: 20px; margin: 0 0 6px; }
+    p { margin: 0 0 18px; color: var(--text-muted); font-size: 14px; line-height: 1.55; }
+    .status { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 14px; background: var(--accent-tint); font-size: 14px; font-weight: 600; margin-bottom: 18px; }
+    .status i { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; background: #1f9d55; }
+    .status.off i { background: #8a93a0; }
+    .status.debug i { background: #d98a00; }
+    .actions { display: grid; gap: 10px; }
+    button { font: inherit; font-size: 14px; font-weight: 600; padding: 12px 16px; border-radius: 999px; cursor: pointer; border: 1px solid var(--control-border); background: var(--control-bg); color: var(--text-color); box-shadow: var(--control-highlight), var(--control-shadow); }
+    button:hover { background: var(--control-bg-hover); }
+    button.primary { background: var(--link-color); border-color: transparent; color: #fff; box-shadow: 0 4px 14px var(--accent-glow); }
+    button[hidden] { display: none; }
+    a { color: var(--link-color); }
+    .back { display: block; margin-top: 18px; font-size: 13px; text-align: center; }
+  </style>
+</head>
+<body>
+  <main class="panel glass">
+    <h1>Site stats on this device</h1>
+    <p>Visits to dylankayyem.com are counted anonymously. Turn counting off on your own phone and computers so your visits don't skew the numbers. The setting is saved in this browser only, so repeat it on each browser you use.</p>
+    <div class="status" id="status" role="status"><i></i><span></span></div>
+    <div class="actions">
+      <button class="primary" type="button" data-mode="off">Don't count this browser</button>
+      <button type="button" data-mode="on">Count this browser again</button>
+      <button type="button" data-mode="debug">Debug: count and log events to the console</button>
+    </div>
+    <a class="back" href="index.html">Back to the portfolio</a>
+  </main>
+  <script>
+    (function () {
+      var KEY = 'dk-analytics';
+      var LABELS = { on: 'This browser is counted.', off: 'This browser is not counted.', debug: 'Debug mode: counted, and each event is logged to the console.' };
+      function get() { try { return localStorage.getItem(KEY) || 'on'; } catch (e) { return null; } }
+      function render() {
+        var mode = get(), box = document.getElementById('status');
+        box.className = 'status ' + (mode || '');
+        box.querySelector('span').textContent = mode ? LABELS[mode] || LABELS.on : 'This browser blocks site storage, so the setting can’t be saved here.';
+        document.querySelectorAll('[data-mode]').forEach(function (b) { b.hidden = b.dataset.mode === mode; });
+      }
+      document.querySelector('.actions').addEventListener('click', function (e) {
+        var b = e.target.closest('[data-mode]'); if (!b) return;
+        try { b.dataset.mode === 'on' ? localStorage.removeItem(KEY) : localStorage.setItem(KEY, b.dataset.mode); } catch (x) {}
+        render();
+      });
+      var asked = new URLSearchParams(location.search).get('set');
+      if (asked === 'off' || asked === 'on' || asked === 'debug') { try { asked === 'on' ? localStorage.removeItem(KEY) : localStorage.setItem(KEY, asked); } catch (x) {} }
+      render();
+    })();
+  </script>
+</body>
+</html>
