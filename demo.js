@@ -7,6 +7,7 @@
   'use strict';
   var DEMOS = {
     flowproof: { title: 'FlowProof', note: 'Sample data' },
+    netmon: { title: 'Network Uptime Monitor', note: 'Sample data' },
     healthcare: { title: 'Healthcare Database', note: 'Sample data' },
     bloodbank: { title: 'Blood Bank Database', note: 'Sample data' },
     pawprints: { title: 'PawPrints', note: 'Figma prototype' },

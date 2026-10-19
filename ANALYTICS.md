@@ -96,8 +96,8 @@ Every event also carries `page` (`home`, `about`, `pawprints`, `presto`,
 
 ### Demo funnel
 
-Every demo event carries `demo`: flowproof, healthcare, bloodbank, pawprints,
-itsastart or presto.
+Every demo event carries `demo`: flowproof, netmon, healthcare, bloodbank,
+pawprints, itsastart or presto.
 
 | Event | Properties | Fired when |
 | --- | --- | --- |
@@ -115,6 +115,7 @@ itsastart or presto.
 | Demo | Actions | Goal |
 | --- | --- | --- |
 | FlowProof | `test_event`, `incident_ack`, `incident_resolve`, `key_create`, `key_revoke` | `test_event` (the failing-assertion moment) |
+| Network Uptime Monitor | `simulate_isp`, `simulate_router`, `simulate_dns`, `simulate_site`, `simulate_blip`, `speed_test`, `outage_dismiss`, `monitor_pause`, `monitor_resume`, `enroll_code`, `token_rotate`, `token_revoke` | Any `simulate_*` (watching a failure get counted) |
 | Healthcare | `query_run`, `appointment_booked`, `patient_registered` | Any of them |
 | Blood Bank | `transfusion`, `donation` | Either |
 | PawPrints | (screens) | Reaching *My PlayMarkers* |

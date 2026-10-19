@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Network Uptime Monitor Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../kit.css">
+  <style>
+    :root { --brand: #0071e3; --brand-ink: #ffffff; --brand-soft: rgba(0, 113, 227, 0.12); }
+    :root[data-theme="dark"] { --brand: #0a84ff; --brand-ink: #ffffff; --brand-soft: rgba(10, 132, 255, 0.16); }
+
+    /* Status headline: the state word carries the status, no badge repeating it. */
+    .headline { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; }
+    .headline h1 { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; }
+    .headline h1 b { font-weight: 600; }
+    .headline h1 b.ok { color: var(--ok); } .headline h1 b.bad { color: var(--bad); } .headline h1 b.unknown { color: var(--muted); }
+    .isp { margin-top: 8px; font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .isp b { color: var(--text); font-weight: 600; }
+    .chip { font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 999px; background: var(--brand-soft); color: var(--brand); }
+
+    /* Network history: latency above a status band, one time axis. */
+    .pulse { position: relative; margin-top: 14px; }
+    .pulse svg { display: block; width: 100%; height: 110px; overflow: visible; }
+    .pulse .cursor { position: absolute; top: 0; bottom: 22px; width: 1px; background: var(--line-strong); pointer-events: none; display: none; }
+    .pulse .readout { position: absolute; top: -4px; transform: translateX(-50%); font-size: 11.5px; font-weight: 500; white-space: nowrap; padding: 3px 8px; border-radius: 8px; background: var(--panel); border: 1px solid var(--line); box-shadow: var(--shadow); pointer-events: none; display: none; }
+    .pulse .axis { position: relative; height: 18px; margin-top: 4px; font-size: 11px; color: var(--faint); }
+    .pulse .axis span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+    .pulse .band rect[data-go] { cursor: pointer; }
+    .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+    .legend i.up { background: var(--ok); } .legend i.down { background: var(--bad); }
+    .legend i.unknown { background: repeating-linear-gradient(45deg, var(--faint) 0 2px, transparent 2px 4px); border: 1px solid var(--faint); }
+
+    .agents-line { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 12px; font-size: 13px; }
+    .agents-line > div { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+    /* Network stack: internet -> router -> agents. */
+    .stack { display: flex; align-items: stretch; gap: 0; overflow-x: auto; padding-bottom: 2px; }
+    .stack .node { flex: 1 0 150px; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; background: var(--panel-2); min-width: 0; }
+    .stack .node b { display: block; font-size: 13px; font-weight: 600; }
+    .stack .node span { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .stack .node .badge { display: inline-flex; margin-top: 8px; }
+    .stack .wire { flex: 0 0 26px; align-self: center; height: 2px; background: var(--ok); }
+    .stack .wire.bad { background: var(--bad); }
+    .stack .wire.unknown { background: repeating-linear-gradient(90deg, var(--faint) 0 4px, transparent 4px 7px); }
+    .stack .agents { flex: 1.3 0 170px; display: grid; gap: 8px; }
+
+    .grid.six { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+    .grid.six .stat .value { font-size: 21px; }
+
+    /* Simulator */
+    .scenarios { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+    .scenario { text-align: left; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; background: var(--panel-2); color: var(--text); display: grid; gap: 4px; }
+    .scenario:hover { border-color: var(--brand); }
+    .scenario:disabled { opacity: 0.5; cursor: default; border-color: var(--line); }
+    .scenario b { font-size: 13.5px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+    .scenario b svg { width: 14px; height: 14px; color: var(--brand); }
+    .scenario span { font-size: 12px; color: var(--muted); line-height: 1.45; }
+    .sim { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 14px; margin-top: 14px; }
+    .sim h4 { font-size: 12px; font-weight: 600; color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
+    .sim .pane { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; min-width: 0; }
+    .checks { display: grid; gap: 6px; font-size: 12.5px; }
+    .checks div { display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+    .checks .r { font-family: var(--mono); font-size: 11.5px; white-space: nowrap; }
+    .checks .r.ok { color: var(--ok); } .checks .r.bad { color: var(--bad); }
+    .queue { margin-top: 10px; font-size: 12.5px; padding-top: 10px; border-top: 1px solid var(--line); color: var(--muted); }
+    .queue b { color: var(--text); }
+    .log { display: grid; gap: 6px; font-size: 12.5px; max-height: 300px; overflow-y: auto; }
+    .log div { display: grid; grid-template-columns: 62px 1fr; gap: 8px; line-height: 1.45; }
+    .log time { font-family: var(--mono); font-size: 11.5px; color: var(--faint); padding-top: 1px; }
+    .log .bad { color: var(--bad); } .log .ok { color: var(--ok); } .log .warn { color: var(--warn); } .log .muted { color: var(--muted); }
+    .sim-done { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+    /* Recent check results */
+    .strip { display: flex; gap: 2px; align-items: flex-end; height: 16px; }
+    .strip i { width: 4px; height: 100%; border-radius: 2px; background: var(--ok); opacity: 0.8; }
+    .strip i.bad { background: var(--bad); opacity: 1; }
+    .strip i.off { background: var(--line-strong); }
+
+    /* Speed */
+    .gauge { display: grid; gap: 6px; }
+    .gauge .big { font-size: 40px; font-weight: 600; letter-spacing: -0.03em; line-height: 1; }
+    .gauge .big small { font-size: 15px; font-weight: 500; color: var(--muted); margin-left: 4px; }
+    .speed-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 14px; }
+    details.evidence summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--brand); }
+    details.evidence pre { margin-top: 10px; }
+    .explain { font-size: 13.5px; line-height: 1.6; }
+
+    @media (max-width: 820px) {
+      .sim { grid-template-columns: 1fr; }
+      .stack { flex-direction: column; }
+      .stack .node, .stack .agents { flex: none; }
+      .stack .wire { width: 2px; height: 16px; flex: none; margin-left: 20px; align-self: flex-start; }
+      .stack .wire.unknown { background: repeating-linear-gradient(180deg, var(--faint) 0 4px, transparent 4px 7px); }
+    }
+  </style>
+</head>
+<body>
+  <script src="../../analytics.js"></script>
+  <script src="../kit.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

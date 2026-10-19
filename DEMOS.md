@@ -11,6 +11,7 @@ and can't break when an old deployment expires.
 | Project | Demo type | Flow | Data |
 | --- | --- | --- | --- |
 | FlowProof | Coded app | Sign in → overview → flows → trace explorer → incidents → API keys | Generated: 4 flows, ~500 traces, incidents grouped per failing check |
+| Network Uptime Monitor | Coded app | Sign in → overview → outages → analytics → speed → monitors → agents | Generated: a home network with 34 days of history, 9 outages, brief interruptions and a power cut |
 | Healthcare Database | Coded app | Staff sign in → dashboard → patients → doctors → appointments → query explorer | Generated against the project's real schema (`patient_table`, `doctor_table`, `room_table`…) |
 | Blood Bank Database | Coded app | Sign in → dashboard → inventory → patient–donor matching → donations → transfusions | The project's own `flask/sample_data` CSVs |
 | PawPrints | Figma prototype | Sign in → match → it's a match → PlayMarker map → verify → my PlayMarkers | Final design screens |
@@ -24,6 +25,13 @@ Things worth trying in each:
   assertion fails even though every step "succeeded", and an incident opens.
   That is the product's core idea in one click. Incidents can be acknowledged
   and resolved, and API keys created (shown once) and revoked.
+- **Network Uptime Monitor:** pick a scenario under *Simulate a failure*. The
+  demo runs the project's real rules on compressed time: the agents lose the
+  server and queue their results, upload them when the connection returns,
+  and the server replays them by check time. Five failing monitors become one
+  outage with a plain-language cause. *One website goes down* and *A brief
+  blip* show what doesn't count as an outage. Speed tests, pausing monitors,
+  enrollment codes and token rotation also work.
 - **Healthcare:** the *Query explorer* runs saved SQL from the project against
   the sample data, including the diagnosis-change audit log the project built
   with a trigger.
@@ -50,7 +58,7 @@ index.html  ── "Live demo" button (data-demo="flowproof")
        ├── proto.js / proto.css  shared runner for prototypes: screen list,
        │                      image screens with tap targets, or coded screens
        │                      inside a drawn phone frame
-       ├── flowproof/   healthcare/   bloodbank/     (kit)
+       ├── flowproof/   netmon/   healthcare/   bloodbank/   (kit)
        └── pawprints/   itsastart/    presto/        (proto)
 ```
 

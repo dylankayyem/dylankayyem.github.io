@@ -58,7 +58,7 @@
 <section class="hero-section">
   <div class="text">
     <p class="eyebrow">Junior Marketing Technology Manager &middot; Boulder, CO</p>
-    <h1>Hello, I'm Dylan 👋</h1>
+    <h1>Hello, I'm Dylan <span class="wave" role="img" aria-label="waving hand">👋</span></h1>
     <p>I'm a UI/UX Designer turned Software Engineer based in Broomfield, Colorado.</p>
     <p>Currently, I'm the Junior Marketing Technology Manager for <a href="https://www.titanvans.com/" target="_blank" rel="noopener noreferrer">Titan Vans</a> and <a href="https://www.timbervankits.com/" target="_blank" rel="noopener noreferrer">Timber Van Kits</a> in Boulder, CO.</p>
     <p>Aspiring to push the world forward by creating a bridge between people and technology.</p>
@@ -498,6 +498,46 @@
           <span>Live demo</span>
         </a>
         <a href="https://github.com/dylankayyem/flowproof" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-github"></i>
+          <span>Github</span>
+        </a>
+      </div>
+    </li>
+
+    <li class = "project-item">
+      <div class="education-card">
+      <div class="degree">
+      <span class="title">Network Uptime Monitor</span>
+      <span class="date">JUL 2026</span>
+      </div>
+      <br>
+      <div class="stack">
+                <img src="image/typescript-logo.svg" alt="TypeScript logo" data-tip="TypeScript" data-tip-sub="Typed JavaScript">
+                <img class="light-only" src="image/nextjs-logo.svg" alt="Next.js logo" data-tip="Next.js" data-tip-sub="React framework">
+                <img aria-hidden="true" class="dark-only" src="image/nextjs-logo-dark.svg" alt="Next.js logo" data-tip="Next.js" data-tip-sub="React framework">
+                <img src="image/react-logo.svg" alt="React logo" data-tip="React" data-tip-sub="UI library">
+                <img src="image/tailwind-logo.svg" alt="Tailwind CSS logo" data-tip="Tailwind CSS" data-tip-sub="Utility-first styling">
+                <img src="image/nodejs-logo.svg" alt="Node.js logo" data-tip="Node.js" data-tip-sub="Monitoring agent runtime">
+                <img src="image/postgresql-logo.svg" alt="PostgreSQL logo" data-tip="PostgreSQL" data-tip-sub="Relational database">
+                <img class="light-only" src="image/prisma-logo.svg" alt="Prisma logo" data-tip="Prisma" data-tip-sub="TypeScript ORM &amp; migrations">
+                <img aria-hidden="true" class="dark-only" src="image/prisma-logo-dark.svg" alt="Prisma logo" data-tip="Prisma" data-tip-sub="TypeScript ORM &amp; migrations">
+                <img class="light-only" src="image/sqlite-logo.svg" alt="SQLite logo" data-tip="SQLite" data-tip-sub="Agent's offline queue">
+                <img aria-hidden="true" class="dark-only" src="image/sqlite-logo-dark.svg" alt="SQLite logo" data-tip="SQLite" data-tip-sub="Agent's offline queue">
+                <img src="image/zod-logo.svg" alt="Zod logo" data-tip="Zod" data-tip-sub="Schema validation">
+                <img src="image/docker-logo.svg" alt="Docker logo" data-tip="Docker" data-tip-sub="Containers">
+                <img src="image/pnpm-logo.svg" alt="pnpm logo" data-tip="pnpm" data-tip-sub="Package manager">
+      </div>
+      <span class="descr">
+        A self-hosted network monitor I built that counts real outages and explains their likely cause in plain language. A local Node.js agent runs router, ping, DNS, HTTP, and TCP checks, commits every result to a SQLite queue so nothing is lost while the internet is down, and uploads them over an outbound-only, token-authenticated API when the connection returns. The server replays results by check time through a per-monitor state machine (three failures open an incident, two successes close it), correlates related incidents into a single network outage, and classifies it with deterministic, versioned rules: router, internet provider, DNS, or one website. It's a pnpm TypeScript monorepo with a Next.js dashboard, PostgreSQL through Prisma, Zod contracts shared by the agent and server, speed tests under a monthly data budget, webhook alerts, and a Windows service installer.
+      </span>
+      <br>
+      </div>
+      <div class="links">
+        <a class="demo-link" href="demos/netmon/index.html" data-demo="netmon" data-tip="Live demo" data-tip-sub="Simulate an outage and watch it get counted" data-tip-nav>
+          <i class="fa-solid fa-play"></i>
+          <span>Live demo</span>
+        </a>
+        <a href="https://github.com/dylankayyem/network-monitor" target="_blank" rel="noopener noreferrer">
           <i class="fa-brands fa-github"></i>
           <span>Github</span>
         </a>

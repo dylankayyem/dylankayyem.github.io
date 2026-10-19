@@ -304,6 +304,21 @@ main > section > h2 + .group {
   margin-bottom: 22px;
 }
 
+/* Waves once on load, pivoting at the wrist like a real wave. */
+.hero-section h1 .wave {
+  display: inline-block;
+  transform-origin: 70% 75%;
+  animation: wave 1.8s ease-in-out 0.4s 1 both;
+}
+
+@keyframes wave {
+  0%, 60%, 100% { transform: rotate(0deg); }
+  10%, 30% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+}
+
 .hero-section p {
   font-size: 17px;
   color: var(--text-muted);
