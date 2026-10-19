@@ -11,9 +11,10 @@ demos, so it can answer:
 - How long do they spend in a demo?
 - Do they then reach out (email, LinkedIn, contact form) or grab the resume?
 
-Everything is wired up and tested. The only step left is creating the
-analytics account and pasting its ID into `analytics.js` (see **Turning it
-on**). Until then the code runs but sends nothing.
+Analytics is live: `analytics.js` holds the Umami website ID
+(`ffde26c0-cf0d-4968-a23f-fe3e7c72ff77`). The remaining one-time steps in
+**Turning it on** are excluding your own devices, a first check in Umami's
+Realtime view, and building the reports.
 
 ## How it works
 
@@ -58,9 +59,9 @@ index.html ── demo.js (overlay)
 1. Create a free account at <https://cloud.umami.is>.
 2. **Settings → Websites → Add website.** Name: `dylankayyem.com`, domain:
    `dylankayyem.com`.
-3. Copy the **Website ID**, paste it into `analytics.js`, and push:
+3. Copy the **Website ID**, paste it into `analytics.js`, and push (done):
    ```js
-   websiteId: '00000000-0000-0000-0000-000000000000',
+   websiteId: 'ffde26c0-cf0d-4968-a23f-fe3e7c72ff77',
    ```
 4. **Exclude yourself.** On each of your own devices and browsers, open
    <https://dylankayyem.com/analytics.html> and press **Don't count this

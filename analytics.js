@@ -16,7 +16,7 @@
 (function () {
   'use strict';
   var CONFIG = {
-    websiteId: '',                                 // Umami → Settings → Websites → Website ID
+    websiteId: 'ffde26c0-cf0d-4968-a23f-fe3e7c72ff77', // Umami → Settings → Websites → Website ID
     src: 'https://cloud.umami.is/script.js',
     hosts: ['dylankayyem.com', 'www.dylankayyem.com', 'dylankayyem.github.io'],
     honorDoNotTrack: true
